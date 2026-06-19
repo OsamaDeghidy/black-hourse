@@ -230,13 +230,13 @@ async function saveDb(data: any) {
 
 // REST APIs
 // 1. Get database records
-app.get("/api/data", async (req, res) => {
+app.get(["/api/data", "/data"], async (req, res) => {
   const db = await loadDb();
   res.json(db);
 });
 
 // 2. Update database records (sync from client)
-app.post("/api/data", async (req, res) => {
+app.post(["/api/data", "/data"], async (req, res) => {
   const data = req.body;
   if (!data?.items || !data?.sales) {
     return res.status(400).json({ error: "Invalid data format" });
@@ -246,7 +246,7 @@ app.post("/api/data", async (req, res) => {
 });
 
 // 3. Gemini Intelligent Assistant Integration (التخيلات ومحاكاة البيانات)
-app.post("/api/gemini", async (req, res) => {
+app.post(["/api/gemini", "/gemini"], async (req, res) => {
   const { prompt, currentInventory, salesHistory, scenarioType } = req.body;
   
   if (!process.env.GROQ_API_KEY) {
