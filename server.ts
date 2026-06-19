@@ -163,9 +163,37 @@ const DEFAULT_DB = {
   orders: []
 };
 
+import { Redis } from "@upstash/redis";
+
+// Only initialize Redis if environment variables are present, else fallback to null to avoid crashing locally without KV.
+const redisUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+const redisToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+
+const redis = (redisUrl && redisToken) 
+  ? new Redis({
+      url: redisUrl,
+      token: redisToken,
+    }) 
+  : null;
+
 // Help helper to initialize and load / save DB
 async function loadDb() {
   try {
+    if (redis) {
+      const data = await redis.get("blackhours_prototype_db");
+      if (data) {
+        // Ensure properties exist
+        const parsed: any = typeof data === "string" ? JSON.parse(data) : data;
+        parsed.logs = parsed.logs || [];
+        parsed.requests = parsed.requests || [];
+        parsed.orders = parsed.orders || [];
+        return parsed;
+      }
+      await redis.set("blackhours_prototype_db", DEFAULT_DB);
+      return DEFAULT_DB;
+    }
+
+    // Fallback to local FS if Redis isn't configured (e.g. local dev before linking)
     if (!existsSync(DB_DIR)) {
       await fs.mkdir(DB_DIR, { recursive: true });
     }
@@ -187,6 +215,11 @@ async function loadDb() {
 
 async function saveDb(data: any) {
   try {
+    if (redis) {
+      await redis.set("blackhours_prototype_db", data);
+      return;
+    }
+
     if (!existsSync(DB_DIR)) {
       await fs.mkdir(DB_DIR, { recursive: true });
     }
