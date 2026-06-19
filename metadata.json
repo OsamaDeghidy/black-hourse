@@ -1,0 +1,8 @@
+{
+  "name": "blackhours",
+  "description": "نظام ذكي متطور لإدارة المخزون والمبيعات لفرعي محلات blackhours لقطع غيار الهواتف وإكسسواراتها، مع مزامنة كاملة وتحليلات وتنبيهات ومساعد ذكي للتنبؤ والتخيل وربط غوغل شيت.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
