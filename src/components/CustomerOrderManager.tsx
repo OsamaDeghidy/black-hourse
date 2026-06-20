@@ -194,51 +194,51 @@ export default function CustomerOrderManager({
   return (
     <div className="space-y-6">
       {/* 1. WEEKLY BESTSELLERS CHART DASHBOARD */}
-      <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 shadow-lg">
-        <div className="flex items-center gap-2 mb-4 border-b border-neutral-800 pb-3">
-          <TrendingUp className="w-5 h-5 text-emerald-400" />
+      <div className="bg-surface-card border border-surface-border rounded-3xl p-5 shadow-lg">
+        <div className="flex items-center gap-2 mb-4 border-b border-surface-border pb-3">
+          <TrendingUp className="w-5 h-5 text-brand-light" />
           <div>
-            <h3 className="font-extrabold text-white text-base">التقرير الذكي الأسبوعي: العناصر الأكثر مبيعاً 📈</h3>
-            <p className="text-xs text-neutral-400">إحصاءات المبيعات وسحب الأصناف الكلي للسبعة أيام الماضية لكل قناة توزيع</p>
+            <h3 className="font-extrabold text-text-primary text-base">التقرير الذكي الأسبوعي: العناصر الأكثر مبيعاً 📈</h3>
+            <p className="text-xs text-text-secondary">إحصاءات المبيعات وسحب الأصناف الكلي للسبعة أيام الماضية لكل قناة توزيع</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Branch 1 Bestsellers */}
-          <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-850 space-y-3">
-            <div className="flex items-center justify-between border-b border-neutral-800 pb-2 mb-1">
-              <span className="text-xs font-black text-cyan-400">فرع 1 الرئيسي</span>
-              <span className="text-[10px] text-neutral-500 font-bold">آخر ٧ أيام</span>
+          <div className="bg-surface-base rounded-2xl p-4 border border-surface-border space-y-3">
+            <div className="flex items-center justify-between border-b border-surface-border pb-2 mb-1">
+              <span className="text-xs font-black text-brand-light">فرع 1 الرئيسي</span>
+              <span className="text-[10px] text-text-tertiary font-bold">آخر ٧ أيام</span>
             </div>
             {weeklyBestsellers.branch1.length === 0 ? (
-              <p className="text-[11px] text-neutral-600 text-center py-6 font-bold">لا يوجد مبيعات في هذا الفرع هذا الأسبوع</p>
+              <p className="text-[11px] text-text-tertiary text-center py-6 font-bold">لا يوجد مبيعات في هذا الفرع هذا الأسبوع</p>
             ) : (
               weeklyBestsellers.branch1.map((item, index) => (
                 <div key={index} className="flex items-center justify-between text-xs font-semibold">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <span className="w-5 h-5 rounded-full bg-neutral-900 text-[10px] flex items-center justify-center border border-neutral-850 text-white font-mono">{index + 1}</span>
-                    <span className="text-neutral-300 truncate font-sans">{item.name}</span>
+                    <span className="w-5 h-5 rounded-full bg-surface-card text-[10px] flex items-center justify-center border border-surface-border text-text-primary font-mono">{index + 1}</span>
+                    <span className="text-text-secondary truncate font-sans">{item.name}</span>
                   </div>
-                  <span className="text-cyan-400 font-mono shrink-0 font-black">+{item.quantity} قطع</span>
+                  <span className="text-brand-light font-mono shrink-0 font-black">+{item.quantity} قطع</span>
                 </div>
               ))
             )}
           </div>
 
           {/* Branch 2 Bestsellers */}
-          <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-850 space-y-3">
-            <div className="flex items-center justify-between border-b border-neutral-800 pb-2 mb-1">
+          <div className="bg-surface-base rounded-2xl p-4 border border-surface-border space-y-3">
+            <div className="flex items-center justify-between border-b border-surface-border pb-2 mb-1">
               <span className="text-xs font-black text-amber-500">فرع 2 الفرعي</span>
-              <span className="text-[10px] text-neutral-500 font-bold">آخر ٧ أيام</span>
+              <span className="text-[10px] text-text-tertiary font-bold">آخر ٧ أيام</span>
             </div>
             {weeklyBestsellers.branch2.length === 0 ? (
-              <p className="text-[11px] text-neutral-600 text-center py-6 font-bold">لا يوجد مبيعات في هذا الفرع هذا الأسبوع</p>
+              <p className="text-[11px] text-text-tertiary text-center py-6 font-bold">لا يوجد مبيعات في هذا الفرع هذا الأسبوع</p>
             ) : (
               weeklyBestsellers.branch2.map((item, index) => (
                 <div key={index} className="flex items-center justify-between text-xs font-semibold">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <span className="w-5 h-5 rounded-full bg-neutral-900 text-[10px] flex items-center justify-center border border-neutral-850 text-white font-mono">{index + 1}</span>
-                    <span className="text-neutral-300 truncate font-sans">{item.name}</span>
+                    <span className="w-5 h-5 rounded-full bg-surface-card text-[10px] flex items-center justify-center border border-surface-border text-text-primary font-mono">{index + 1}</span>
+                    <span className="text-text-secondary truncate font-sans">{item.name}</span>
                   </div>
                   <span className="text-amber-500 font-mono shrink-0 font-black">+{item.quantity} قطع</span>
                 </div>
@@ -247,21 +247,21 @@ export default function CustomerOrderManager({
           </div>
 
           {/* Online Bestsellers */}
-          <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-850 space-y-3">
-            <div className="flex items-center justify-between border-b border-neutral-800 pb-2 mb-1">
-              <span className="text-xs font-black text-emerald-400">المبيعات أونلاين (الماركت بليس)</span>
-              <span className="text-[10px] text-neutral-500 font-bold">آخر ٧ أيام</span>
+          <div className="bg-surface-base rounded-2xl p-4 border border-surface-border space-y-3">
+            <div className="flex items-center justify-between border-b border-surface-border pb-2 mb-1">
+              <span className="text-xs font-black text-brand-light">المبيعات أونلاين (الماركت بليس)</span>
+              <span className="text-[10px] text-text-tertiary font-bold">آخر ٧ أيام</span>
             </div>
             {weeklyBestsellers.online.length === 0 ? (
-              <p className="text-[11px] text-neutral-600 text-center py-6 font-bold">لا يوجد مبيعات أونلاين هذا الأسبوع</p>
+              <p className="text-[11px] text-text-tertiary text-center py-6 font-bold">لا يوجد مبيعات أونلاين هذا الأسبوع</p>
             ) : (
               weeklyBestsellers.online.map((item, index) => (
                 <div key={index} className="flex items-center justify-between text-xs font-semibold">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <span className="w-5 h-5 rounded-full bg-neutral-900 text-[10px] flex items-center justify-center border border-neutral-850 text-white font-mono">{index + 1}</span>
-                    <span className="text-neutral-300 truncate">{item.name}</span>
+                    <span className="w-5 h-5 rounded-full bg-surface-card text-[10px] flex items-center justify-center border border-surface-border text-text-primary font-mono">{index + 1}</span>
+                    <span className="text-text-secondary truncate">{item.name}</span>
                   </div>
-                  <span className="text-emerald-400 font-mono shrink-0 font-black">+{item.quantity} قطع</span>
+                  <span className="text-brand-light font-mono shrink-0 font-black">+{item.quantity} قطع</span>
                 </div>
               ))
             )}
@@ -272,20 +272,20 @@ export default function CustomerOrderManager({
       {/* 2. ORDER LISTING MANAGER AND CONTROL */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Orders list view */}
-        <div className="lg:col-span-2 bg-neutral-900 border border-neutral-800 rounded-3xl p-5 space-y-4 shadow-xl">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between border-b border-neutral-800 pb-4">
+        <div className="lg:col-span-2 bg-surface-card border border-surface-border rounded-3xl p-5 space-y-4 shadow-xl">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between border-b border-surface-border pb-4">
             <div className="flex items-center gap-2">
-              <ShoppingBag className="w-5 h-5 text-cyan-400" />
+              <ShoppingBag className="w-5 h-5 text-brand-light" />
               <div>
-                <h3 className="font-extrabold text-white text-base">تتبع وإدارة طلبات العملاء 🛍️</h3>
-                <p className="text-xs text-neutral-400">أشرطة الحالة وإتمام مبيعات الماركت بليس للعملاء</p>
+                <h3 className="font-extrabold text-text-primary text-base">تتبع وإدارة طلبات العملاء 🛍️</h3>
+                <p className="text-xs text-text-secondary">أشرطة الحالة وإتمام مبيعات الماركت بليس للعملاء</p>
               </div>
             </div>
 
             {/* Filter controls */}
             <div className="flex gap-2 w-full md:w-auto">
               <select
-                className="bg-neutral-950 border border-neutral-805 rounded-xl px-2.5 py-1.5 text-xs font-bold text-neutral-300 outline-none"
+                className="bg-surface-base border border-surface-border rounded-xl px-2.5 py-1.5 text-xs font-bold text-text-secondary outline-none"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
@@ -303,11 +303,11 @@ export default function CustomerOrderManager({
 
           {/* Search bar */}
           <div className="relative">
-            <Search className="w-4 h-4 text-neutral-500 absolute right-3 top-3.5" />
+            <Search className="w-4 h-4 text-text-tertiary absolute right-3 top-3.5" />
             <input
               type="text"
               placeholder="ابحث باسم العميل، رقم الهاتف، أو رقم الفاتورة..."
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-9 py-2 text-xs text-neutral-200 outline-none focus:border-cyan-500"
+              className="w-full bg-surface-base border border-surface-border rounded-xl px-9 py-2 text-xs text-text-primary outline-none focus:border-brand"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -315,15 +315,15 @@ export default function CustomerOrderManager({
 
           {/* Orders Table Container */}
           {filteredOrders.length === 0 ? (
-            <div className="py-12 bg-neutral-950 rounded-2xl border border-neutral-850 text-center text-neutral-500 font-bold text-xs">
-              <ShoppingBag className="w-10 h-10 mx-auto text-neutral-700 mb-2" />
+            <div className="py-12 bg-surface-base rounded-2xl border border-surface-border text-center text-text-tertiary font-bold text-xs">
+              <ShoppingBag className="w-10 h-10 mx-auto text-text-tertiary mb-2" />
               لا توجد طلبات تطابق معايير الفلترة المحددة.
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-right text-xs">
                 <thead>
-                  <tr className="bg-neutral-950 border-b border-neutral-800 text-neutral-400 font-black">
+                  <tr className="bg-surface-base border-b border-surface-border text-text-secondary font-black">
                     <th className="py-3 px-3">رقم الطلب</th>
                     <th className="py-3 px-3">المشتري والهاتف</th>
                     <th className="py-3 px-3">التوصيل</th>
@@ -341,18 +341,18 @@ export default function CustomerOrderManager({
                       <tr 
                         key={order.id}
                         onClick={() => setSelectedOrderId(order.id)}
-                        className={`border-b border-neutral-850 hover:bg-neutral-800/30 cursor-pointer transition ${
-                          isSelected ? "bg-neutral-850/40 border-r-2 border-cyan-400" : ""
+                        className={`border-b border-surface-border hover:bg-surface-card-hover/30 cursor-pointer transition ${
+                          isSelected ? "bg-surface-card-hover/40 border-r-2 border-brand" : ""
                         }`}
                       >
-                        <td className="py-3.5 px-3 font-mono font-bold text-neutral-200">{order.id}</td>
+                        <td className="py-3.5 px-3 font-mono font-bold text-text-primary">{order.id}</td>
                         <td className="py-3.5 px-3">
-                          <p className="font-bold text-white">{order.customerName}</p>
-                          <p className="text-[10px] text-neutral-500 font-mono mt-0.5">{order.customerPhone}</p>
+                          <p className="font-bold text-text-primary">{order.customerName}</p>
+                          <p className="text-[10px] text-text-tertiary font-mono mt-0.5">{order.customerPhone}</p>
                         </td>
-                        <td className="py-3.5 px-3 text-neutral-350">
+                        <td className="py-3.5 px-3 text-text-primary">
                           {order.deliveryMethod === "delivery" ? (
-                            <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400">
+                            <span className="flex items-center gap-1 text-[10px] font-bold text-brand-light">
                               <Truck className="w-3.5 h-3.5" /> توصيل شحن
                             </span>
                           ) : (
@@ -361,14 +361,14 @@ export default function CustomerOrderManager({
                             </span>
                           )}
                         </td>
-                        <td className="py-3.5 px-3 font-mono font-black text-white">{order.totalAmount} ج.م</td>
+                        <td className="py-3.5 px-3 font-mono font-black text-text-primary">{order.totalAmount} ج.م</td>
                         <td className="py-3.5 px-3 text-center">
                           <span className={`px-2 py-0.5 rounded text-[9px] uppercase font-bold ${
                             order.status === "pending" ? "bg-amber-500/10 text-amber-400" :
                             order.status === "approved" ? "bg-blue-500/10 text-blue-400" :
                             order.status === "shipped" ? "bg-purple-500/10 text-purple-400" :
-                            order.status === "ready_for_pickup" ? "bg-cyan-500/10 text-cyan-400" :
-                            order.status === "delivered" ? "bg-emerald-500/10 text-emerald-400" :
+                            order.status === "ready_for_pickup" ? "bg-brand/10 text-brand-light" :
+                            order.status === "delivered" ? "bg-brand/10 text-brand-light" :
                             "bg-rose-500/10 text-rose-400"
                           }`}>
                             {order.status === "pending" ? "قيد المراجعة" :
@@ -384,7 +384,7 @@ export default function CustomerOrderManager({
                               <AlertTriangle className="w-3 h-3" /> بلاغ تأخير!
                             </span>
                           ) : (
-                            <span className="text-neutral-600 text-[10px] font-bold">-</span>
+                            <span className="text-text-tertiary text-[10px] font-bold">-</span>
                           )}
                         </td>
                       </tr>
@@ -397,43 +397,43 @@ export default function CustomerOrderManager({
         </div>
 
         {/* Order details control workspace */}
-        <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 shadow-xl space-y-4">
-          <div className="border-b border-neutral-850 pb-3 flex items-center gap-2">
-            <Briefcase className="w-4.5 h-4.5 text-cyan-400" />
-            <h3 className="font-extrabold text-white text-base">منطقة التحكم بالطلب المختار</h3>
+        <div className="bg-surface-card border border-surface-border rounded-3xl p-5 shadow-xl space-y-4">
+          <div className="border-b border-surface-border pb-3 flex items-center gap-2">
+            <Briefcase className="w-4.5 h-4.5 text-brand-light" />
+            <h3 className="font-extrabold text-text-primary text-base">منطقة التحكم بالطلب المختار</h3>
           </div>
 
           {!selectedOrder ? (
-            <div className="py-16 text-center text-neutral-500 font-bold space-y-2">
+            <div className="py-16 text-center text-text-tertiary font-bold space-y-2">
               <div className="text-3xl">👈</div>
               <p className="text-xs">يرجى نقر أحد الطلبات بالجدول لاستعراض تفاصيله وتعديل حالة التسليم.</p>
             </div>
           ) : (
             <div className="space-y-4 text-xs font-semibold">
               {/* Order Info Summary */}
-              <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-850 space-y-2.5">
-                <div className="flex justify-between items-center bg-neutral-900/40 p-2 rounded-xl">
-                  <span className="text-neutral-400">رقم الفاتورة:</span>
-                  <span className="font-mono text-white font-extrabold">{selectedOrder.id}</span>
+              <div className="bg-surface-base rounded-2xl p-4 border border-surface-border space-y-2.5">
+                <div className="flex justify-between items-center bg-surface-card/40 p-2 rounded-xl">
+                  <span className="text-text-secondary">رقم الفاتورة:</span>
+                  <span className="font-mono text-text-primary font-extrabold">{selectedOrder.id}</span>
                 </div>
                 <div>
-                  <span className="text-neutral-400 block mb-1">اسم المشتري:</span>
-                  <p className="text-white text-sm font-extrabold">{selectedOrder.customerName}</p>
+                  <span className="text-text-secondary block mb-1">اسم المشتري:</span>
+                  <p className="text-text-primary text-sm font-extrabold">{selectedOrder.customerName}</p>
                 </div>
                 <div>
-                  <span className="text-neutral-400 block mb-1">رقم هاتف المشتري:</span>
-                  <p className="text-white font-mono text-sm leading-none">{selectedOrder.customerPhone}</p>
+                  <span className="text-text-secondary block mb-1">رقم هاتف المشتري:</span>
+                  <p className="text-text-primary font-mono text-sm leading-none">{selectedOrder.customerPhone}</p>
                 </div>
                 <div>
-                  <span className="text-neutral-400 block mb-1">تاريخ تقديم الأوردر:</span>
-                  <p className="text-neutral-300 font-mono">
+                  <span className="text-text-secondary block mb-1">تاريخ تقديم الأوردر:</span>
+                  <p className="text-text-secondary font-mono">
                     {new Date(selectedOrder.date).toLocaleString("ar-EG")}
                   </p>
                 </div>
                 <div>
-                  <span className="text-neutral-400 block mb-1">طريقة الشحن / التوصيل:</span>
+                  <span className="text-text-secondary block mb-1">طريقة الشحن / التوصيل:</span>
                   {selectedOrder.deliveryMethod === "delivery" ? (
-                    <p className="text-emerald-400 bg-emerald-950/20 px-2.5 py-1.5 rounded-xl border border-emerald-900/30 flex items-center gap-1">
+                    <p className="text-brand-light bg-emerald-950/20 px-2.5 py-1.5 rounded-xl border border-emerald-900/30 flex items-center gap-1">
                       <Truck className="w-4 h-4" />
                       توصيل للعنوان: {selectedOrder.deliveryAddress}
                     </p>
@@ -445,29 +445,29 @@ export default function CustomerOrderManager({
                   )}
                 </div>
                 <div>
-                  <span className="text-neutral-400 block mb-1">طريقة الدفع:</span>
-                  <p className="text-neutral-200">
+                  <span className="text-text-secondary block mb-1">طريقة الدفع:</span>
+                  <p className="text-text-primary">
                     {selectedOrder.paymentMethod === "cod" ? "💵 كاش عند الاستلام" : "💳 دفع إلكتروني بالفيزا"}
                   </p>
                 </div>
               </div>
 
               {/* Items Summary list */}
-              <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-850 space-y-2">
-                <span className="text-neutral-400 block mb-1">أصناف الفاتورة قطاعي:</span>
-                <div className="space-y-1.5 border-b border-neutral-800 pb-2 mb-2">
+              <div className="bg-surface-base rounded-2xl p-4 border border-surface-border space-y-2">
+                <span className="text-text-secondary block mb-1">أصناف الفاتورة قطاعي:</span>
+                <div className="space-y-1.5 border-b border-surface-border pb-2 mb-2">
                   {selectedOrder.items.map((it, idx) => (
-                    <div key={idx} className="flex justify-between items-center gap-2 text-neutral-300">
+                    <div key={idx} className="flex justify-between items-center gap-2 text-text-secondary">
                       <span>{it.productName}</span>
-                      <span className="font-mono text-white shrink-0 font-black">
+                      <span className="font-mono text-text-primary shrink-0 font-black">
                         x{it.quantity} = {it.total} ج.م
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="flex justify-between items-center text-white font-extrabold text-sm font-sans">
+                <div className="flex justify-between items-center text-text-primary font-extrabold text-sm font-sans">
                   <span>المبلغ الكلي المستلم:</span>
-                  <span className="text-cyan-400 font-mono text-base">{selectedOrder.totalAmount} ج.م</span>
+                  <span className="text-brand-light font-mono text-base">{selectedOrder.totalAmount} ج.م</span>
                 </div>
               </div>
 
@@ -478,12 +478,12 @@ export default function CustomerOrderManager({
                     <AlertTriangle className="w-4 h-4 animate-bounce" />
                     <span>⚠️ شكوى تأخير نشطة وبلاغ عاجل!</span>
                   </div>
-                  <p className="text-[11px] leading-relaxed text-zinc-350">
+                  <p className="text-[11px] leading-relaxed text-text-primary">
                     شكوى المشتري: "{selectedOrder.delayContactMessage}"
                   </p>
                   <button
                     onClick={() => handleResolveDelayMessage(selectedOrder)}
-                    className="w-full bg-rose-600 hover:bg-rose-500 text-white font-extrabold py-2 rounded-xl text-xs transition flex items-center justify-center gap-1 cursor-pointer"
+                    className="w-full bg-rose-600 hover:bg-rose-500 text-text-primary font-extrabold py-2 rounded-xl text-xs transition flex items-center justify-center gap-1 cursor-pointer"
                   >
                     <Check className="w-4 h-4" />
                     تم الاتصال بالعميل وحل الشكوى بنجاح ✅
@@ -494,20 +494,20 @@ export default function CustomerOrderManager({
               {/* Status Update Pipeline */}
               {selectedOrder.status !== "delivered" && selectedOrder.status !== "cancelled" ? (
                 <div className="space-y-2">
-                  <span className="text-neutral-400 block mb-1">تعديل حالة السير ومتابعة الاستلام:</span>
+                  <span className="text-text-secondary block mb-1">تعديل حالة السير ومتابعة الاستلام:</span>
 
                   {/* Deduct branch settings (only relevant if shipping/delivery is chosen) */}
                   {selectedOrder.deliveryMethod === "delivery" && selectedOrder.status === "shipped" && (
-                    <div className="p-3 bg-neutral-950 border border-neutral-850 rounded-2xl mb-2 space-y-1">
-                      <label className="text-[11px] text-zinc-400 block mb-1 font-bold">خصم المخزون من أي فرع عند التسليم؟</label>
+                    <div className="p-3 bg-surface-base border border-surface-border rounded-2xl mb-2 space-y-1">
+                      <label className="text-[11px] text-text-secondary block mb-1 font-bold">خصم المخزون من أي فرع عند التسليم؟</label>
                       <div className="flex gap-2">
                         <button
                           type="button"
                           onClick={() => setDeductBranchChoice("branch1")}
                           className={`flex-1 py-1 px-2 rounded-lg border text-[10px] font-bold transition ${
                             deductBranchChoice === "branch1"
-                              ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
-                              : "bg-neutral-900 text-neutral-500 border-neutral-850"
+                              ? "bg-brand/10 text-brand-light border-brand/30"
+                              : "bg-surface-card text-text-tertiary border-surface-border"
                           }`}
                         >
                           فرع 1
@@ -517,8 +517,8 @@ export default function CustomerOrderManager({
                           onClick={() => setDeductBranchChoice("branch2")}
                           className={`flex-1 py-1 px-2 rounded-lg border text-[10px] font-bold transition ${
                             deductBranchChoice === "branch2"
-                              ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
-                              : "bg-neutral-900 text-neutral-500 border-neutral-850"
+                              ? "bg-brand/10 text-brand-light border-brand/30"
+                              : "bg-surface-card text-text-tertiary border-surface-border"
                           }`}
                         >
                           فرع 2
@@ -532,7 +532,7 @@ export default function CustomerOrderManager({
                     {selectedOrder.status === "pending" && (
                       <button
                         onClick={() => handleUpdateStatus(selectedOrder, "approved")}
-                        className="col-span-2 bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-2.5 rounded-xl transition flex items-center justify-center gap-1 cursor-pointer"
+                        className="col-span-2 bg-blue-600 hover:bg-blue-500 text-text-primary font-extrabold py-2.5 rounded-xl transition flex items-center justify-center gap-1 cursor-pointer"
                       >
                         <CheckCircle className="w-4 h-4" /> قبول وتأكيد الطلب المختار
                       </button>
@@ -543,14 +543,14 @@ export default function CustomerOrderManager({
                         {selectedOrder.deliveryMethod === "delivery" ? (
                           <button
                             onClick={() => handleUpdateStatus(selectedOrder, "shipped")}
-                            className="bg-purple-600 hover:bg-purple-500 text-white font-extrabold py-2.5 rounded-xl transition flex items-center justify-center gap-1 cursor-pointer"
+                            className="bg-purple-600 hover:bg-purple-500 text-text-primary font-extrabold py-2.5 rounded-xl transition flex items-center justify-center gap-1 cursor-pointer"
                           >
                             <Truck className="w-4 h-4" /> بدء الشحن الفوري
                           </button>
                         ) : (
                           <button
                             onClick={() => handleUpdateStatus(selectedOrder, "ready_for_pickup")}
-                            className="bg-cyan-600 hover:bg-cyan-500 text-white font-extrabold py-2.5 rounded-xl transition flex items-center justify-center gap-1 cursor-pointer"
+                            className="bg-brand hover:bg-brand text-text-primary font-extrabold py-2.5 rounded-xl transition flex items-center justify-center gap-1 cursor-pointer"
                           >
                             <Store className="w-4 h-4" /> جاهز للتسليم في الفرع
                           </button>
@@ -568,7 +568,7 @@ export default function CustomerOrderManager({
                       <>
                         <button
                           onClick={() => handleUpdateStatus(selectedOrder, "delivered")}
-                          className="col-span-2 bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3 rounded-xl transition flex items-center justify-center gap-1 cursor-pointer"
+                          className="col-span-2 bg-brand-dark hover:bg-brand text-text-primary font-black py-3 rounded-xl transition flex items-center justify-center gap-1 cursor-pointer"
                         >
                           ✔️ تم التسليم وسحب المخزون قطاعي
                         </button>
@@ -583,12 +583,12 @@ export default function CustomerOrderManager({
                   </div>
                 </div>
               ) : (
-                <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-850 text-center space-y-2">
-                  <span className="text-emerald-400 text-xl font-bold">✔️</span>
-                  <p className="text-[11px] font-extrabold text-neutral-350">
+                <div className="bg-surface-base rounded-2xl p-4 border border-surface-border text-center space-y-2">
+                  <span className="text-brand-light text-xl font-bold">✔️</span>
+                  <p className="text-[11px] font-extrabold text-text-primary">
                     هذا الطلب في حالة نهائية مغلقة [{selectedOrder.status === "delivered" ? "مكتمل ومسلّم" : "ملغي"}].
                   </p>
-                  <p className="text-[10px] text-neutral-500 font-normal">لا يسمح بإجراء المزيد من التغييرات اللوجستية عليه.</p>
+                  <p className="text-[10px] text-text-tertiary font-normal">لا يسمح بإجراء المزيد من التغييرات اللوجستية عليه.</p>
                 </div>
               )}
             </div>

@@ -337,9 +337,9 @@ export default function CustomerMarketplace({
       case "shipped":
         return { label: "جاري الشحن/التوصيل", color: "bg-purple-500/20 text-purple-400 border-purple-500/30", icon: Truck };
       case "ready_for_pickup":
-        return { label: "جاهز للاستلام بالفرع", color: "bg-cyan-500/20 text-cyan-400 border-cyan-400/30", icon: Store };
+        return { label: "جاهز للاستلام بالفرع", color: "bg-brand/20 text-brand-light border-brand/30", icon: Store };
       case "delivered":
-        return { label: "تم استلام الطلب", color: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", icon: CheckCircle };
+        return { label: "تم استلام الطلب", color: "bg-brand/20 text-brand-light border-brand/30", icon: CheckCircle };
       case "cancelled":
         return { label: "ملغي", color: "bg-rose-500/20 text-rose-400 border-rose-500/30", icon: X };
     }
@@ -358,13 +358,13 @@ export default function CustomerMarketplace({
   return (
     <div className="space-y-6">
       {/* Sub Tabs for client view */}
-      <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-1.5 flex flex-wrap gap-1 max-w-lg mx-auto shadow-xl">
+      <div className="bg-surface-card border border-surface-border rounded-3xl p-1.5 flex flex-wrap gap-1 max-w-lg mx-auto shadow-xl">
         <button
           onClick={() => setActiveSubTab("shop")}
           className={`flex-1 min-w-[100px] px-4 py-2.5 rounded-2xl text-xs font-black transition flex items-center justify-center gap-1.5 ${
             activeSubTab === "shop" 
-              ? "bg-white text-black shadow-lg" 
-              : "text-neutral-400 hover:text-white"
+              ? "bg-text-primary text-surface-base shadow-lg" 
+              : "text-text-secondary hover:text-text-primary"
           }`}
         >
           <ShoppingCart className="w-4 h-4" />
@@ -374,8 +374,8 @@ export default function CustomerMarketplace({
           onClick={() => setActiveSubTab("track")}
           className={`flex-1 min-w-[100px] px-4 py-2.5 rounded-2xl text-xs font-black transition flex items-center justify-center gap-1.5 ${
             activeSubTab === "track" 
-              ? "bg-white text-black shadow-lg" 
-              : "text-neutral-400 hover:text-white"
+              ? "bg-text-primary text-surface-base shadow-lg" 
+              : "text-text-secondary hover:text-text-primary"
           }`}
         >
           <Clock className="w-4 h-4" />
@@ -387,8 +387,8 @@ export default function CustomerMarketplace({
           }}
           className={`flex-1 min-w-[100px] px-4 py-2.5 rounded-2xl text-xs font-black transition flex items-center justify-center gap-1.5 relative ${
             activeSubTab === "chat" 
-              ? "bg-white text-black shadow-lg" 
-              : "text-neutral-400 hover:text-white"
+              ? "bg-text-primary text-surface-base shadow-lg" 
+              : "text-text-secondary hover:text-text-primary"
           }`}
         >
           <Sparkles className="w-4 h-4 text-amber-500 animate-pulse" />
@@ -402,13 +402,13 @@ export default function CustomerMarketplace({
           {/* Main Catalog View (2 cols on large screen) */}
           <div className="lg:col-span-2 space-y-4">
             {/* Search & Category Filter Section */}
-            <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 space-y-4">
+            <div className="bg-surface-card border border-surface-border rounded-3xl p-5 space-y-4">
               <div className="relative">
-                <Search className="w-4.5 h-4.5 text-neutral-500 absolute right-3.5 top-3.5" />
+                <Search className="w-4.5 h-4.5 text-text-tertiary absolute right-3.5 top-3.5" />
                 <input
                   type="text"
                   placeholder="ابحث بتحديد قطع الغيار أو التوافق (مثال: iPhone 13, شاشات...)"
-                  className="w-full bg-neutral-950 border border-neutral-800 rounded-2xl px-10 py-3 text-xs text-neutral-200 focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-surface-base border border-surface-border rounded-2xl px-10 py-3 text-xs text-text-primary focus:outline-none focus:border-brand"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -420,8 +420,8 @@ export default function CustomerMarketplace({
                   onClick={() => setSelectedCategory("all")}
                   className={`px-3.5 py-1.5 rounded-xl text-[11px] font-bold border ${
                     selectedCategory === "all" 
-                      ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/35"
-                      : "bg-neutral-950 text-neutral-400 border-neutral-850 hover:text-neutral-200"
+                      ? "bg-brand/10 text-brand-light border-brand/35"
+                      : "bg-surface-base text-text-secondary border-surface-border hover:text-text-primary"
                   }`}
                 >
                   الكل ({items.length})
@@ -434,8 +434,8 @@ export default function CustomerMarketplace({
                       onClick={() => setSelectedCategory(cat)}
                       className={`px-3 py-1.5 rounded-xl text-[11px] font-bold border whitespace-nowrap ${
                         selectedCategory === cat 
-                          ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/35"
-                          : "bg-neutral-950 text-neutral-400 border-neutral-850 hover:text-neutral-200"
+                          ? "bg-brand/10 text-brand-light border-brand/35"
+                          : "bg-surface-base text-text-secondary border-surface-border hover:text-text-primary"
                       }`}
                     >
                       {cat} ({count})
@@ -448,9 +448,9 @@ export default function CustomerMarketplace({
             {/* Products Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {filteredProducts.length === 0 ? (
-                <div className="col-span-2 bg-neutral-900 border border-neutral-800 rounded-3xl p-12 text-center">
-                  <ShoppingCart className="w-12 h-12 text-neutral-600 mx-auto mb-3" />
-                  <p className="text-sm font-semibold text-neutral-400">نأسف، لم نجد قطع غيار مطابقة لبحثك وموديلك المختار حالياً.</p>
+                <div className="col-span-2 bg-surface-card border border-surface-border rounded-3xl p-12 text-center">
+                  <ShoppingCart className="w-12 h-12 text-text-tertiary mx-auto mb-3" />
+                  <p className="text-sm font-semibold text-text-secondary">نأسف، لم نجد قطع غيار مطابقة لبحثك وموديلك المختار حالياً.</p>
                 </div>
               ) : (
                 filteredProducts.map((product) => {
@@ -460,11 +460,11 @@ export default function CustomerMarketplace({
                   return (
                     <div 
                       key={product.id}
-                      className="bg-neutral-900 border border-neutral-850 rounded-3xl p-4.5 flex flex-col justify-between hover:border-neutral-750 transition"
+                      className="bg-surface-card border border-surface-border rounded-3xl p-4.5 flex flex-col justify-between hover:border-surface-border transition"
                     >
                       <div className="space-y-3">
                         {/* Image Frame */}
-                        <div className="aspect-video w-full rounded-2xl overflow-hidden bg-neutral-950 border border-neutral-850 flex items-center justify-center relative group">
+                        <div className="aspect-video w-full rounded-2xl overflow-hidden bg-surface-base border border-surface-border flex items-center justify-center relative group">
                           {product.imageUrl ? (
                             <img 
                               src={product.imageUrl} 
@@ -475,17 +475,17 @@ export default function CustomerMarketplace({
                           ) : (
                             <div className="text-center p-4">
                               <span className="text-3xl">📦</span>
-                              <p className="text-[10px] text-neutral-600 mt-1 uppercase tracking-widest font-bold">blackhours group</p>
+                              <p className="text-[10px] text-text-tertiary mt-1 uppercase tracking-widest font-bold">blackhours group</p>
                             </div>
                           )}
-                          <span className="absolute top-2.5 right-2 a-tag text-[9px] bg-black/75 px-2 py-1 rounded text-cyan-400 font-bold border border-cyan-400/20">
+                          <span className="absolute top-2.5 right-2 a-tag text-[9px] bg-surface-base/75 px-2 py-1 rounded text-brand-light font-bold border border-brand/20">
                             {product.category}
                           </span>
                         </div>
 
                         {/* Text and price metadata */}
                         <div>
-                          <h4 className="font-bold text-white text-xs md:text-sm leading-snug line-clamp-2 min-h-[36px]">
+                          <h4 className="font-bold text-text-primary text-xs md:text-sm leading-snug line-clamp-2 min-h-[36px]">
                             {product.name}
                           </h4>
                           
@@ -493,12 +493,12 @@ export default function CustomerMarketplace({
                           <div className="flex flex-wrap gap-1 mt-2.5">
                             {product.compatibleMobiles && product.compatibleMobiles.length > 0 ? (
                               product.compatibleMobiles.slice(0, 3).map((compat, i) => (
-                                <span key={i} className="text-[9px] bg-neutral-950 text-neutral-400 border border-neutral-850 px-2 py-0.5 rounded">
+                                <span key={i} className="text-[9px] bg-surface-base text-text-secondary border border-surface-border px-2 py-0.5 rounded">
                                   📱 {compat}
                                 </span>
                               ))
                             ) : (
-                              <span className="text-[9px] bg-neutral-950 text-neutral-400 border border-neutral-850 px-2 py-0.5 rounded">
+                              <span className="text-[9px] bg-surface-base text-text-secondary border border-surface-border px-2 py-0.5 rounded">
                                 📱 متوافق مع كافة الأجهزة
                               </span>
                             )}
@@ -507,18 +507,18 @@ export default function CustomerMarketplace({
                       </div>
 
                       {/* Buy action & stock status */}
-                      <div className="mt-4 pt-3.5 border-t border-neutral-850 flex items-center justify-between">
+                      <div className="mt-4 pt-3.5 border-t border-surface-border flex items-center justify-between">
                         <div>
-                          <p className="text-neutral-500 text-[10px] uppercase font-bold leading-none">سعر المستهلك قطعة</p>
-                          <p className="text-lg font-black text-white font-mono mt-0.5">
-                            {product.priceRetail} <span className="text-xs text-neutral-400 font-sans">ج.م</span>
+                          <p className="text-text-tertiary text-[10px] uppercase font-bold leading-none">سعر المستهلك قطعة</p>
+                          <p className="text-lg font-black text-text-primary font-mono mt-0.5">
+                            {product.priceRetail} <span className="text-xs text-text-secondary font-sans">ج.م</span>
                           </p>
                         </div>
 
                         {isAvailable ? (
                           <button
                             onClick={() => handleAddToCart(product)}
-                            className="bg-white hover:bg-neutral-200 text-black px-3.5 py-2 rounded-xl text-xs font-black transition flex items-center gap-1.5 cursor-pointer"
+                            className="bg-text-primary hover:bg-text-secondary text-surface-base px-3.5 py-2 rounded-xl text-xs font-black transition flex items-center gap-1.5 cursor-pointer"
                           >
                             <Plus className="w-3.5 h-3.5 stroke-[3px]" />
                             إضافة للسلة
@@ -538,22 +538,22 @@ export default function CustomerMarketplace({
 
           {/* Checkout / Cart Side Panel */}
           <div className="space-y-4">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 shadow-xl space-y-4 sticky top-24">
-              <div className="flex items-center justify-between border-b border-neutral-850 pb-3">
+            <div className="bg-surface-card border border-surface-border rounded-3xl p-5 shadow-xl space-y-4 sticky top-24">
+              <div className="flex items-center justify-between border-b border-surface-border pb-3">
                 <div className="flex items-center gap-2">
-                  <ShoppingCart className="w-5 h-5 text-cyan-400" />
-                  <h3 className="font-bold text-white text-base">سلة التسوق الخاصة بك</h3>
+                  <ShoppingCart className="w-5 h-5 text-brand-light" />
+                  <h3 className="font-bold text-text-primary text-base">سلة التسوق الخاصة بك</h3>
                 </div>
-                <span className="bg-neutral-800 text-white font-black text-xs px-2.5 py-1 rounded-full font-mono">
+                <span className="bg-surface-card-hover text-text-primary font-black text-xs px-2.5 py-1 rounded-full font-mono">
                   {cart.length} أصناف
                 </span>
               </div>
 
               {cart.length === 0 ? (
-                <div className="py-12 text-center text-neutral-500 font-bold space-y-2">
+                <div className="py-12 text-center text-text-tertiary font-bold space-y-2">
                   <div className="text-3xl">🛒</div>
                   <p className="text-xs">السلة فارغة حالياً.</p>
-                  <p className="text-[10px] text-neutral-600 font-normal">تصفح المعارض أعلاه وأضف قطع للتوافق لمتابعة الشراء والتوصيل.</p>
+                  <p className="text-[10px] text-text-tertiary font-normal">تصفح المعارض أعلاه وأضف قطع للتوافق لمتابعة الشراء والتوصيل.</p>
                 </div>
               ) : (
                 <>
@@ -562,24 +562,24 @@ export default function CustomerMarketplace({
                     {cart.map((item) => (
                       <div 
                         key={item.product.id}
-                        className="bg-neutral-950 rounded-2xl p-3 border border-neutral-850 flex gap-2 justify-between"
+                        className="bg-surface-base rounded-2xl p-3 border border-surface-border flex gap-2 justify-between"
                       >
                         <div className="space-y-1 flex-1 min-w-0">
-                          <h5 className="font-bold text-xs text-white truncate">{item.product.name}</h5>
-                          <p className="text-[10px] text-neutral-500 font-mono">القطعة: {item.product.priceRetail} ج.م</p>
+                          <h5 className="font-bold text-xs text-text-primary truncate">{item.product.name}</h5>
+                          <p className="text-[10px] text-text-tertiary font-mono">القطعة: {item.product.priceRetail} ج.م</p>
                           <div className="flex items-center gap-2 pt-1">
-                            <span className="text-[9px] text-neutral-400">الكمية:</span>
-                            <div className="flex items-center bg-neutral-900 border border-neutral-800 rounded-lg p-0.5">
+                            <span className="text-[9px] text-text-secondary">الكمية:</span>
+                            <div className="flex items-center bg-surface-card border border-surface-border rounded-lg p-0.5">
                               <button
                                 onClick={() => handleUpdateCartQty(item.product.id, -1)}
-                                className="w-4 h-4 rounded bg-neutral-800 text-white text-[10px] flex items-center justify-center font-bold"
+                                className="w-4 h-4 rounded bg-surface-card-hover text-text-primary text-[10px] flex items-center justify-center font-bold"
                               >
                                 -
                               </button>
-                              <span className="w-7 text-center font-mono font-bold text-white text-xs">{item.quantity}</span>
+                              <span className="w-7 text-center font-mono font-bold text-text-primary text-xs">{item.quantity}</span>
                               <button
                                 onClick={() => handleUpdateCartQty(item.product.id, 1)}
-                                className="w-4 h-4 rounded bg-neutral-800 text-white text-[10px] flex items-center justify-center font-bold"
+                                className="w-4 h-4 rounded bg-surface-card-hover text-text-primary text-[10px] flex items-center justify-center font-bold"
                               >
                                 +
                               </button>
@@ -590,12 +590,12 @@ export default function CustomerMarketplace({
                         <div className="flex flex-col justify-between items-end shrink-0">
                           <button
                             onClick={() => handleRemoveFromCart(item.product.id)}
-                            className="text-neutral-600 hover:text-rose-400 p-0.5 transition"
+                            className="text-text-tertiary hover:text-rose-400 p-0.5 transition"
                             title="حذف من السلة"
                           >
                             <X className="w-3.5 h-3.5" />
                           </button>
-                          <span className="text-sm font-extrabold text-white font-mono">
+                          <span className="text-sm font-extrabold text-text-primary font-mono">
                             {item.product.priceRetail * item.quantity} ج.م
                           </span>
                         </div>
@@ -604,20 +604,20 @@ export default function CustomerMarketplace({
                   </div>
 
                   {/* Summary receipt info */}
-                  <div className="bg-neutral-950 rounded-2xl border border-neutral-850 p-4 space-y-2 font-bold text-xs">
-                    <div className="flex justify-between text-neutral-400">
+                  <div className="bg-surface-base rounded-2xl border border-surface-border p-4 space-y-2 font-bold text-xs">
+                    <div className="flex justify-between text-text-secondary">
                       <span>إجمالي القطع:</span>
-                      <span className="font-mono text-white">
+                      <span className="font-mono text-text-primary">
                         {cart.reduce((sum, i) => sum + i.quantity, 0)} قطع
                       </span>
                     </div>
-                    <div className="flex justify-between text-neutral-400">
+                    <div className="flex justify-between text-text-secondary">
                       <span>تكلفة الشحن والتجهيز:</span>
-                      <span className="text-emerald-400">مجاناً بمناسبة الإطلاق 🎁</span>
+                      <span className="text-brand-light">مجاناً بمناسبة الإطلاق 🎁</span>
                     </div>
-                    <div className="border-t border-neutral-800 pt-2 flex justify-between text-white text-sm">
+                    <div className="border-t border-surface-border pt-2 flex justify-between text-text-primary text-sm">
                       <span>المبلغ الإجمالي المستحق:</span>
-                      <span className="font-mono text-cyan-400 text-lg">
+                      <span className="font-mono text-brand-light text-lg">
                         {cartTotalAmount.toLocaleString("ar-EG")} ج.م
                       </span>
                     </div>
@@ -626,7 +626,7 @@ export default function CustomerMarketplace({
                   {/* Open Checkout Trigger */}
                   <button
                     onClick={() => setIsCheckoutOpen(true)}
-                    className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3 rounded-2xl text-xs transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full bg-brand-dark hover:bg-brand text-text-primary font-black py-3 rounded-2xl text-xs transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <CheckCircle className="w-3.5 h-3.5" />
                     المتابعة وتعبئة بيانات الشحن والدفع
@@ -641,25 +641,25 @@ export default function CustomerMarketplace({
       {/* TRACKING ORDER SECTION */}
       {activeSubTab === "track" && (
         <div className="max-w-3xl mx-auto space-y-6">
-          <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 space-y-4 shadow-xl text-center">
-            <h3 className="font-bold text-lg text-white">تتبع حالة طلباتك برقم الهاتف 📦</h3>
-            <p className="text-xs text-neutral-400 max-w-md mx-auto">
+          <div className="bg-surface-card border border-surface-border rounded-3xl p-5 space-y-4 shadow-xl text-center">
+            <h3 className="font-bold text-lg text-text-primary">تتبع حالة طلباتك برقم الهاتف 📦</h3>
+            <p className="text-xs text-text-secondary max-w-md mx-auto">
               أدخل رقم الهاتف الذي استخدمته عند تسجيل الطلب لاستعراض الشحنات الحالية والمباعة وتتبع حالتها فوراً.
             </p>
 
             <div className="flex gap-2 max-w-md mx-auto">
               <button
                 onClick={handleTrackPhoneLookup}
-                className="bg-white hover:bg-neutral-200 text-black px-4 py-2.5 rounded-xl text-xs font-black transition shrink-5 cursor-pointer"
+                className="bg-text-primary hover:bg-text-secondary text-surface-base px-4 py-2.5 rounded-xl text-xs font-black transition shrink-5 cursor-pointer"
               >
                 استعلام وتثبيت
               </button>
               <div className="relative flex-1">
-                <Phone className="w-4 h-4 text-neutral-500 absolute right-3 top-3" />
+                <Phone className="w-4 h-4 text-text-tertiary absolute right-3 top-3" />
                 <input
                   type="text"
                   placeholder="اكتب رقم الهاتف الخاص بك هنا..."
-                  className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-9 py-2 text-xs font-mono text-center tracking-widest text-neutral-200"
+                  className="w-full bg-surface-base border border-surface-border rounded-xl px-9 py-2 text-xs font-mono text-center tracking-widest text-text-primary"
                   value={trackingPhone}
                   onChange={(e) => setTrackingPhone(e.target.value)}
                   onKeyDown={(e) => {
@@ -672,13 +672,13 @@ export default function CustomerMarketplace({
 
           {hasTracked && (
             <div className="space-y-4">
-              <h4 className="font-bold text-neutral-400 text-xs text-right mr-1">الطلبات المسجلة ({trackedOrders.length})</h4>
+              <h4 className="font-bold text-text-secondary text-xs text-right mr-1">الطلبات المسجلة ({trackedOrders.length})</h4>
               
               {trackedOrders.length === 0 ? (
-                <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-12 text-center text-neutral-500 font-bold space-y-2">
+                <div className="bg-surface-card border border-surface-border rounded-3xl p-12 text-center text-text-tertiary font-bold space-y-2">
                   <div className="text-3xl">📭</div>
                   <p className="text-xs">لا توجد طلبات مسجلة برقم الهاتف المتوفر.</p>
-                  <p className="text-[10px] text-neutral-600 font-normal">تأكد من كتابة الرقم بشكل سليم أو إتمام طلب في المعرض أولاً.</p>
+                  <p className="text-[10px] text-text-tertiary font-normal">تأكد من كتابة الرقم بشكل سليم أو إتمام طلب في المعرض أولاً.</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -691,14 +691,14 @@ export default function CustomerMarketplace({
                     return (
                       <div 
                         key={order.id}
-                        className="bg-neutral-900 border border-neutral-850 rounded-3xl p-5 hover:border-neutral-750 transition flex flex-col justify-between"
+                        className="bg-surface-card border border-surface-border rounded-3xl p-5 hover:border-surface-border transition flex flex-col justify-between"
                       >
                         <div className="space-y-3">
                           {/* Order Header */}
-                          <div className="flex justify-between items-center pb-2 border-b border-neutral-850">
+                          <div className="flex justify-between items-center pb-2 border-b border-surface-border">
                             <div>
-                              <span className="text-[9px] text-neutral-500 font-bold uppercase block">رقم طلب الشحنة</span>
-                              <span className="font-mono text-xs font-extrabold text-white">{order.id}</span>
+                              <span className="text-[9px] text-text-tertiary font-bold uppercase block">رقم طلب الشحنة</span>
+                              <span className="font-mono text-xs font-extrabold text-text-primary">{order.id}</span>
                             </div>
                             <span className={`text-[10px] px-2.5 py-1 rounded-xl border font-bold flex items-center gap-1 shrink-0 ${matchedStatus.color}`}>
                               <StatusIcon className="w-3 h-3" />
@@ -707,46 +707,46 @@ export default function CustomerMarketplace({
                           </div>
 
                           {/* Items and receipt count */}
-                          <div className="bg-neutral-950 rounded-2xl p-3 border border-neutral-850 flex flex-col gap-1.5 font-bold text-xs text-neutral-300">
+                          <div className="bg-surface-base rounded-2xl p-3 border border-surface-border flex flex-col gap-1.5 font-bold text-xs text-text-secondary">
                             {order.items.map((item, i) => (
                               <div key={i} className="flex justify-between gap-2 leading-tight">
                                 <span className="line-clamp-1">{item.productName}</span>
-                                <span className="font-mono text-zinc-100 shrink-0">x{item.quantity}</span>
+                                <span className="font-mono text-text-primary shrink-0">x{item.quantity}</span>
                               </div>
                             ))}
-                            <div className="border-t border-neutral-800 pt-1.5 flex justify-between text-white text-xs mt-1">
+                            <div className="border-t border-surface-border pt-1.5 flex justify-between text-text-primary text-xs mt-1">
                               <span>المبلغ المدفوع/المطلوب:</span>
-                              <span className="font-mono text-cyan-400">{order.totalAmount} ج.م</span>
+                              <span className="font-mono text-brand-light">{order.totalAmount} ج.م</span>
                             </div>
                           </div>
 
                           {/* Logistics Info */}
-                          <div className="text-xs space-y-1 text-neutral-400">
+                          <div className="text-xs space-y-1 text-text-secondary">
                             <p className="flex items-center gap-1.5">
-                              <User className="w-3.5 h-3.5 text-neutral-500" />
-                              <span>الاسم: <strong className="text-neutral-200">{order.customerName}</strong></span>
+                              <User className="w-3.5 h-3.5 text-text-tertiary" />
+                              <span>الاسم: <strong className="text-text-primary">{order.customerName}</strong></span>
                             </p>
                             <p className="flex items-center gap-1.5">
                               {order.deliveryMethod === "delivery" ? (
                                 <>
-                                  <Truck className="w-3.5 h-3.5 text-neutral-500" />
-                                  <span className="truncate">شحن للعنوان: <strong className="text-neutral-200">{order.deliveryAddress}</strong></span>
+                                  <Truck className="w-3.5 h-3.5 text-text-tertiary" />
+                                  <span className="truncate">شحن للعنوان: <strong className="text-text-primary">{order.deliveryAddress}</strong></span>
                                 </>
                               ) : (
                                 <>
-                                  <Store className="w-3.5 h-3.5 text-neutral-500" />
-                                  <span>استلام بالفرع: <strong className="text-neutral-200">{order.pickupBranch === "branch1" ? "فرع 1" : "فرع 2"}</strong></span>
+                                  <Store className="w-3.5 h-3.5 text-text-tertiary" />
+                                  <span>استلام بالفرع: <strong className="text-text-primary">{order.pickupBranch === "branch1" ? "فرع 1" : "فرع 2"}</strong></span>
                                 </>
                               )}
                             </p>
-                            <p className="text-[10px] text-neutral-500">
+                            <p className="text-[10px] text-text-tertiary">
                               تاريخ تقديم الطلب: {formatDateString(order.date)}
                             </p>
                           </div>
                         </div>
 
                         {/* Interactive contact delay block if pending or approved */}
-                        <div className="mt-4 pt-3 border-t border-neutral-850">
+                        <div className="mt-4 pt-3 border-t border-surface-border">
                           {order.delayContactRequested ? (
                             <div className="bg-rose-950/20 border border-rose-900/35 rounded-2xl p-2.5 text-center">
                               <p className="text-[10px] text-rose-300 font-bold flex items-center justify-center gap-1">
@@ -754,13 +754,13 @@ export default function CustomerMarketplace({
                                 تم إرسال إشعار التأخير للإدارة ومتابعة طلبك جارية!
                               </p>
                               {order.delayContactMessage && (
-                                <p className="text-[9px] text-neutral-500 mt-1 truncate">رسالتك: "{order.delayContactMessage}"</p>
+                                <p className="text-[9px] text-text-tertiary mt-1 truncate">رسالتك: "{order.delayContactMessage}"</p>
                               )}
                             </div>
                           ) : (
                             <button
                               onClick={() => setSelectedOrder(order)}
-                              className="w-full bg-neutral-950 border border-neutral-800 hover:border-rose-900/40 text-neutral-400 hover:text-rose-400 py-1.5 rounded-xl text-[10px] font-bold transition flex items-center justify-center gap-1 cursor-pointer"
+                              className="w-full bg-surface-base border border-surface-border hover:border-rose-900/40 text-text-secondary hover:text-rose-400 py-1.5 rounded-xl text-[10px] font-bold transition flex items-center justify-center gap-1 cursor-pointer"
                             >
                               <AlertTriangle className="w-3.5 h-3.5 text-rose-500" />
                               الطلب متأخر؟ إرسال إشعار متابعة فوري للفرع ⚡
@@ -780,19 +780,19 @@ export default function CustomerMarketplace({
       {/* INTELLIGENT AI STORE ASSISTANT CHAT TAB */}
       {activeSubTab === "chat" && (
         <div className="max-w-2xl mx-auto space-y-4">
-          <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 shadow-2xl relative overflow-hidden flex flex-col h-[520px]">
+          <div className="bg-surface-card border border-surface-border rounded-3xl p-5 shadow-2xl relative overflow-hidden flex flex-col h-[520px]">
             {/* Header */}
-            <div className="flex items-center gap-3 border-b border-neutral-850 pb-3 mb-4 shrink-0 justify-between">
+            <div className="flex items-center gap-3 border-b border-surface-border pb-3 mb-4 shrink-0 justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg animate-pulse">
-                  <Sparkles className="w-5 h-5 text-neutral-950" />
+                  <Sparkles className="w-5 h-5 text-text-tertiary" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-white text-sm">مستشارك الفني الذكي 🤖</h3>
-                  <p className="text-[10px] text-neutral-400">يجيبك فوراً عن التوافق والتكاليف الاستهلاكية لقطع الغيار</p>
+                  <h3 className="font-bold text-text-primary text-sm">مستشارك الفني الذكي 🤖</h3>
+                  <p className="text-[10px] text-text-secondary">يجيبك فوراً عن التوافق والتكاليف الاستهلاكية لقطع الغيار</p>
                 </div>
               </div>
-              <div className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full px-2.5 py-0.5 text-[10px] font-bold">
+              <div className="bg-brand/10 text-brand-light border border-brand/20 rounded-full px-2.5 py-0.5 text-[10px] font-bold">
                 نشط بأحدث كتالوج 📱
               </div>
             </div>
@@ -807,8 +807,8 @@ export default function CustomerMarketplace({
                   <div 
                     className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-xs font-medium leading-relaxed shadow-md ${
                       msg.sender === "user" 
-                        ? "bg-emerald-600 text-white rounded-br-none text-right" 
-                        : "bg-neutral-950 border border-neutral-850 text-neutral-200 rounded-bl-none text-right"
+                        ? "bg-brand-dark text-text-primary rounded-br-none text-right" 
+                        : "bg-surface-base border border-surface-border text-text-primary rounded-bl-none text-right"
                     }`}
                     dir="rtl"
                   >
@@ -818,8 +818,8 @@ export default function CustomerMarketplace({
               ))}
               {isChatLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-neutral-950 border border-neutral-850 text-neutral-400 rounded-2xl rounded-bl-none px-4 py-2 text-xs flex items-center gap-2">
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-emerald-400" />
+                  <div className="bg-surface-base border border-surface-border text-text-secondary rounded-2xl rounded-bl-none px-4 py-2 text-xs flex items-center gap-2">
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-brand-light" />
                     <span>جاري التفكير وتأكيد التوافق...</span>
                   </div>
                 </div>
@@ -830,19 +830,19 @@ export default function CustomerMarketplace({
             <div className="flex flex-wrap gap-1.5 mb-2 overflow-x-auto shrink-0 justify-end" dir="rtl">
               <button 
                 onClick={() => setChatInput("هل يوجد شاشه متوافقه مع ايفون 13 برو ماكس؟")}
-                className="text-[10px] bg-neutral-950 hover:bg-neutral-800 text-neutral-400 px-2.5 py-1 rounded-lg border border-neutral-850"
+                className="text-[10px] bg-surface-base hover:bg-surface-card-hover text-text-secondary px-2.5 py-1 rounded-lg border border-surface-border"
               >
                 🔍 متوافق مع ايفون 13؟
               </button>
               <button 
                 onClick={() => setChatInput("ما هي الفروع المتوفر بها بطارية ايفون 11 برو ماكس وسعرها؟")}
-                className="text-[10px] bg-neutral-950 hover:bg-neutral-800 text-neutral-400 px-2.5 py-1 rounded-lg border border-neutral-850"
+                className="text-[10px] bg-surface-base hover:bg-surface-card-hover text-text-secondary px-2.5 py-1 rounded-lg border border-surface-border"
               >
                 🔋 فروع بطارية 11 برو؟
               </button>
               <button 
                 onClick={() => setChatInput("ما هي أسعار الشاشات المتاحة لديكم قطاعي؟")}
-                className="text-[10px] bg-neutral-950 hover:bg-neutral-800 text-neutral-400 px-2.5 py-1 rounded-lg border border-neutral-850"
+                className="text-[10px] bg-surface-base hover:bg-surface-card-hover text-text-secondary px-2.5 py-1 rounded-lg border border-surface-border"
               >
                 💸 أسعار الشاشات قطاعي؟
               </button>
@@ -853,14 +853,14 @@ export default function CustomerMarketplace({
               <button
                 type="submit"
                 disabled={!chatInput.trim() || isChatLoading}
-                className="bg-white hover:bg-neutral-200 text-black p-3.5 rounded-2xl transition disabled:opacity-40 disabled:cursor-not-allowed shrink-0 cursor-pointer"
+                className="bg-text-primary hover:bg-text-secondary text-surface-base p-3.5 rounded-2xl transition disabled:opacity-40 disabled:cursor-not-allowed shrink-0 cursor-pointer"
               >
-                <Send className="w-4 h-4 transform rotate-180 text-black" />
+                <Send className="w-4 h-4 transform rotate-180 text-surface-base" />
               </button>
               <input
                 type="text"
                 placeholder="اكتب استشارتك للمساعد الذكي هنا بخصوص القطع والبطاريات..."
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-2xl px-4 py-3 text-xs text-neutral-200 focus:outline-none focus:border-emerald-500"
+                className="w-full bg-surface-base border border-surface-border rounded-2xl px-4 py-3 text-xs text-text-primary focus:outline-none focus:border-brand"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
               />
@@ -871,14 +871,14 @@ export default function CustomerMarketplace({
 
       {/* CHECKOUT POPUP DIALOG */}
       {isCheckoutOpen && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 bg-surface-base/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="w-full max-w-lg bg-surface-card border border-surface-border rounded-3xl overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
             {/* Header */}
-            <div className="bg-neutral-950 border-b border-neutral-850 px-6 py-4 flex items-center justify-between">
-              <h3 className="font-extrabold text-white text-base">تقديم وتأكيد الطلب 🧾</h3>
+            <div className="bg-surface-base border-b border-surface-border px-6 py-4 flex items-center justify-between">
+              <h3 className="font-extrabold text-text-primary text-base">تقديم وتأكيد الطلب 🧾</h3>
               <button
                 onClick={() => setIsCheckoutOpen(false)}
-                className="text-neutral-400 hover:text-white p-1 rounded-lg hover:bg-neutral-850"
+                className="text-text-secondary hover:text-text-primary p-1 rounded-lg hover:bg-surface-card-hover"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -886,18 +886,18 @@ export default function CustomerMarketplace({
 
             {/* Form */}
             <form onSubmit={handlePlaceOrderSubmit} className="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
-              <p className="text-[11px] text-zinc-400">يرجى ملء بيانات العميل وعنوان شحن البضاعة لتنفيذ وتأكيد الطلب الفوري أونلاين.</p>
+              <p className="text-[11px] text-text-secondary">يرجى ملء بيانات العميل وعنوان شحن البضاعة لتنفيذ وتأكيد الطلب الفوري أونلاين.</p>
               
               {/* Customer Name */}
               <div className="space-y-1">
-                <label className="block text-neutral-400 text-xs font-bold">اسم العميل الثلاثي بالكامل:</label>
+                <label className="block text-text-secondary text-xs font-bold">اسم العميل الثلاثي بالكامل:</label>
                 <div className="relative">
-                  <User className="w-4 h-4 text-neutral-500 absolute right-3 top-3.5" />
+                  <User className="w-4 h-4 text-text-tertiary absolute right-3 top-3.5" />
                   <input
                     type="text"
                     required
                     placeholder="مثال: أحمد محمد علي"
-                    className="w-full bg-neutral-950 border border-neutral-800 focus:border-cyan-500 rounded-xl px-9 py-2.5 text-xs text-neutral-200 outline-none"
+                    className="w-full bg-surface-base border border-surface-border focus:border-brand rounded-xl px-9 py-2.5 text-xs text-text-primary outline-none"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
                   />
@@ -906,14 +906,14 @@ export default function CustomerMarketplace({
 
               {/* Customer Phone */}
               <div className="space-y-1">
-                <label className="block text-neutral-400 text-xs font-bold">رقم الهاتف (مهم لاستئناف ومتابعة طلبك لاحقاً):</label>
+                <label className="block text-text-secondary text-xs font-bold">رقم الهاتف (مهم لاستئناف ومتابعة طلبك لاحقاً):</label>
                 <div className="relative">
-                  <Phone className="w-4 h-4 text-neutral-500 absolute right-3 top-3.5" />
+                  <Phone className="w-4 h-4 text-text-tertiary absolute right-3 top-3.5" />
                   <input
                     type="tel"
                     required
                     placeholder="مثال: 01012345678"
-                    className="w-full bg-neutral-950 border border-neutral-800 focus:border-cyan-500 rounded-xl px-9 py-2.5 text-xs font-mono text-neutral-200 outline-none"
+                    className="w-full bg-surface-base border border-surface-border focus:border-brand rounded-xl px-9 py-2.5 text-xs font-mono text-text-primary outline-none"
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
                   />
@@ -922,15 +922,15 @@ export default function CustomerMarketplace({
 
               {/* Delivery method */}
               <div className="space-y-1.5">
-                <label className="block text-neutral-400 text-xs font-bold">طريقة الاستلام المفضلة:</label>
+                <label className="block text-text-secondary text-xs font-bold">طريقة الاستلام المفضلة:</label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => setDeliveryMethod("delivery")}
                     className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-xs font-bold transition cursor-pointer ${
                       deliveryMethod === "delivery"
-                        ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/35"
-                        : "bg-neutral-950 text-neutral-400 border-neutral-800 hover:text-white"
+                        ? "bg-brand/10 text-brand-light border-brand/35"
+                        : "bg-surface-base text-text-secondary border-surface-border hover:text-text-primary"
                     }`}
                   >
                     <Truck className="w-4 h-4" />
@@ -941,8 +941,8 @@ export default function CustomerMarketplace({
                     onClick={() => setDeliveryMethod("pickup")}
                     className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-xs font-bold transition cursor-pointer ${
                       deliveryMethod === "pickup"
-                        ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/35"
-                        : "bg-neutral-950 text-neutral-400 border-neutral-800 hover:text-white"
+                        ? "bg-brand/10 text-brand-light border-brand/35"
+                        : "bg-surface-base text-text-secondary border-surface-border hover:text-text-primary"
                     }`}
                   >
                     <Store className="w-4 h-4" />
@@ -954,14 +954,14 @@ export default function CustomerMarketplace({
               {/* Dynamic delivery fields */}
               {deliveryMethod === "delivery" ? (
                 <div className="space-y-1">
-                  <label className="block text-neutral-400 text-xs font-bold">العنوان التفصيلي للشحن والتسليم:</label>
+                  <label className="block text-text-secondary text-xs font-bold">العنوان التفصيلي للشحن والتسليم:</label>
                   <div className="relative">
-                    <MapPin className="w-4 h-4 text-neutral-500 absolute right-3 top-3" />
+                    <MapPin className="w-4 h-4 text-text-tertiary absolute right-3 top-3" />
                     <textarea
                       required
                       rows={2}
                       placeholder="شارع التسعين، التجمع الخامس، بجوار بنك مصر، القاهرة"
-                      className="w-full bg-neutral-950 border border-neutral-800 focus:border-cyan-500 rounded-xl px-9 py-2 text-xs text-neutral-200 outline-none resize-none"
+                      className="w-full bg-surface-base border border-surface-border focus:border-brand rounded-xl px-9 py-2 text-xs text-text-primary outline-none resize-none"
                       value={deliveryAddress}
                       onChange={(e) => setDeliveryAddress(e.target.value)}
                     />
@@ -969,9 +969,9 @@ export default function CustomerMarketplace({
                 </div>
               ) : (
                 <div className="space-y-1">
-                  <label className="block text-neutral-400 text-xs font-bold">تحديد فرع الاستلام:</label>
+                  <label className="block text-text-secondary text-xs font-bold">تحديد فرع الاستلام:</label>
                   <select
-                    className="w-full bg-neutral-950 border border-neutral-805 text-xs text-neutral-200 py-2.5 rounded-xl outline-none focus:border-cyan-500 pr-3 font-bold"
+                    className="w-full bg-surface-base border border-surface-border text-xs text-text-primary py-2.5 rounded-xl outline-none focus:border-brand pr-3 font-bold"
                     value={pickupBranch}
                     onChange={(e) => setPickupBranch(e.target.value as any)}
                   >
@@ -983,7 +983,7 @@ export default function CustomerMarketplace({
 
               {/* Payment Method */}
               <div className="space-y-1.5">
-                <label className="block text-neutral-400 text-xs font-bold">طريقة الدفع:</label>
+                <label className="block text-text-secondary text-xs font-bold">طريقة الدفع:</label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
@@ -991,7 +991,7 @@ export default function CustomerMarketplace({
                     className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer ${
                       paymentMethod === "cod"
                         ? "bg-amber-500/10 text-amber-400 border-amber-500/35"
-                        : "bg-neutral-950 text-neutral-400 border-neutral-800 hover:text-white"
+                        : "bg-surface-base text-text-secondary border-surface-border hover:text-text-primary"
                     }`}
                   >
                     <span>💵</span>
@@ -1002,8 +1002,8 @@ export default function CustomerMarketplace({
                     onClick={() => setPaymentMethod("online")}
                     className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer ${
                       paymentMethod === "online"
-                        ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/35"
-                        : "bg-neutral-950 text-neutral-400 border-neutral-800 hover:text-white"
+                        ? "bg-brand/10 text-brand-light border-brand/35"
+                        : "bg-surface-base text-text-secondary border-surface-border hover:text-text-primary"
                     }`}
                   >
                     <CreditCard className="w-3.5 h-3.5" />
@@ -1014,16 +1014,16 @@ export default function CustomerMarketplace({
 
               {/* Secure Online Card form mock */}
               {paymentMethod === "online" && (
-                <div className="bg-neutral-955 rounded-2xl border border-neutral-850 p-4 space-y-3 font-mono">
-                  <p className="text-[10px] text-cyan-400 text-center font-bold font-sans">💳 نافذة دفع آمنة مشفرة 100%</p>
+                <div className="bg-surface-base rounded-2xl border border-surface-border p-4 space-y-3 font-mono">
+                  <p className="text-[10px] text-brand-light text-center font-bold font-sans">💳 نافذة دفع آمنة مشفرة 100%</p>
                   
                   <div className="space-y-1 text-right">
-                    <label className="block text-[10px] text-neutral-400 font-sans">رقم البطاقة الائتمانية:</label>
+                    <label className="block text-[10px] text-text-secondary font-sans">رقم البطاقة الائتمانية:</label>
                     <input
                       type="text"
                       maxLength={16}
                       placeholder="4000 1234 5678 9010"
-                      className="w-full bg-neutral-950 border border-neutral-800 px-3 py-1.5 rounded-lg text-xs tracking-widest text-center text-white"
+                      className="w-full bg-surface-base border border-surface-border px-3 py-1.5 rounded-lg text-xs tracking-widest text-center text-text-primary"
                       value={cardNumber}
                       onChange={(e) => setCardNumber(e.target.value.replace(/\D/g, ""))}
                     />
@@ -1031,23 +1031,23 @@ export default function CustomerMarketplace({
 
                   <div className="grid grid-cols-2 gap-2 text-right">
                     <div className="space-y-1">
-                      <label className="block text-[10px] text-neutral-400 font-sans">تاريخ الانتهاء:</label>
+                      <label className="block text-[10px] text-text-secondary font-sans">تاريخ الانتهاء:</label>
                       <input
                         type="text"
                         placeholder="MM/YY"
                         maxLength={5}
-                        className="w-full bg-neutral-950 border border-neutral-800 px-3 py-1.5 rounded-lg text-xs text-center text-white"
+                        className="w-full bg-surface-base border border-surface-border px-3 py-1.5 rounded-lg text-xs text-center text-text-primary"
                         value={cardExpiry}
                         onChange={(e) => setCardExpiry(e.target.value)}
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="block text-[10px] text-neutral-400 font-sans">رمز الـ CVV الحماية:</label>
+                      <label className="block text-[10px] text-text-secondary font-sans">رمز الـ CVV الحماية:</label>
                       <input
                         type="password"
                         placeholder="***"
                         maxLength={3}
-                        className="w-full bg-neutral-950 border border-neutral-800 px-3 py-1.5 rounded-lg text-xs text-center text-white"
+                        className="w-full bg-surface-base border border-surface-border px-3 py-1.5 rounded-lg text-xs text-center text-text-primary"
                         value={cardCvv}
                         onChange={(e) => setCardCvv(e.target.value.replace(/\D/g, ""))}
                       />
@@ -1057,11 +1057,11 @@ export default function CustomerMarketplace({
               )}
 
               {/* Action Buttons */}
-              <div className="pt-4 border-t border-neutral-850 flex gap-2">
+              <div className="pt-4 border-t border-surface-border flex gap-2">
                 <button
                   type="submit"
                   disabled={isPaying}
-                  className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 rounded-2xl text-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
+                  className="flex-1 bg-brand-dark hover:bg-brand text-text-primary font-extrabold py-3 rounded-2xl text-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
                 >
                   {isPaying ? (
                     <>
@@ -1078,7 +1078,7 @@ export default function CustomerMarketplace({
                 <button
                   type="button"
                   onClick={() => setIsCheckoutOpen(false)}
-                  className="bg-neutral-850 hover:bg-neutral-800 text-neutral-300 px-4 py-3 rounded-2xl text-xs transition font-bold"
+                  className="bg-surface-card-hover hover:bg-surface-card-hover text-text-secondary px-4 py-3 rounded-2xl text-xs transition font-bold"
                 >
                   تراجع
                 </button>
@@ -1090,14 +1090,14 @@ export default function CustomerMarketplace({
 
       {/* DELAY CLAIM FORM POPUP */}
       {selectedOrder && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden shadow-2xl animate-in fade-in duration-200">
+        <div className="fixed inset-0 bg-surface-base/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="w-full max-w-md bg-surface-card border border-surface-border rounded-3xl overflow-hidden shadow-2xl animate-in fade-in duration-200">
             {/* Header */}
-            <div className="bg-neutral-950 border-b border-neutral-850 px-6 py-4 flex items-center justify-between">
-              <h3 className="font-extrabold text-white text-base">تقديم بلاغ تأخر الطلب ⚡</h3>
+            <div className="bg-surface-base border-b border-surface-border px-6 py-4 flex items-center justify-between">
+              <h3 className="font-extrabold text-text-primary text-base">تقديم بلاغ تأخر الطلب ⚡</h3>
               <button
                 onClick={() => setSelectedOrder(null)}
-                className="text-neutral-400 hover:text-white p-1 rounded-lg hover:bg-neutral-850"
+                className="text-text-secondary hover:text-text-primary p-1 rounded-lg hover:bg-surface-card-hover"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1109,27 +1109,27 @@ export default function CustomerMarketplace({
                 ⚠️ سيصل بلاغك فوراً إلى مشرف الفرع المسؤول عن الفاتورة ومُدير عام المجموعة لتثبيت الأولوية والتعبئة السريعة.
               </div>
 
-              <p className="text-xs text-neutral-400 leading-relaxed text-right">
+              <p className="text-xs text-text-secondary leading-relaxed text-right">
                 تفاصيل الطلب: رقم <strong>{selectedOrder.id}</strong> بقيمة {selectedOrder.totalAmount} ج.م باسم {selectedOrder.customerName}.
               </p>
 
               <div className="space-y-1">
-                <label className="block text-neutral-405 text-xs font-bold text-neutral-305 mr-1">اكتب رسالة الدعم أو الاستفسار لتصل للمشرف:</label>
+                <label className="block text-text-secondary text-xs font-bold text-text-primary mr-1">اكتب رسالة الدعم أو الاستفسار لتصل للمشرف:</label>
                 <textarea
                   required
                   rows={3}
                   placeholder="مثال: الطلب متأخر لأكثر من ساعتين، أرجو شحن الشاشة بأسرع وقت لالتزامي مع فني أخر بالصيانة..."
-                  className="w-full bg-neutral-950 border border-neutral-800 focus:border-rose-500 rounded-xl px-4 py-2 text-xs text-neutral-200 outline-none resize-none"
+                  className="w-full bg-surface-base border border-surface-border focus:border-rose-500 rounded-xl px-4 py-2 text-xs text-text-primary outline-none resize-none"
                   value={delayMessage}
                   onChange={(e) => setDelayMessage(e.target.value)}
                 />
               </div>
 
-              <div className="pt-3 border-t border-neutral-850 flex gap-2">
+              <div className="pt-3 border-t border-surface-border flex gap-2">
                 <button
                   type="submit"
                   disabled={isSubmittingDelayClaim}
-                  className="flex-1 bg-rose-600 hover:bg-rose-500 text-white font-extrabold py-3 rounded-2xl text-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
+                  className="flex-1 bg-rose-600 hover:bg-rose-500 text-text-primary font-extrabold py-3 rounded-2xl text-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
                 >
                   {isSubmittingDelayClaim ? (
                     <>
@@ -1146,7 +1146,7 @@ export default function CustomerMarketplace({
                 <button
                   type="button"
                   onClick={() => setSelectedOrder(null)}
-                  className="bg-neutral-850 hover:bg-neutral-850 text-neutral-300 px-4 py-3 rounded-2xl text-xs transition font-bold"
+                  className="bg-surface-card-hover hover:bg-surface-card-hover text-text-secondary px-4 py-3 rounded-2xl text-xs transition font-bold"
                 >
                   إلغاء
                 </button>

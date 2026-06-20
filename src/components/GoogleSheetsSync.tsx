@@ -283,20 +283,20 @@ export default function GoogleSheetsSync({
   };
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 mb-6 text-right" dir="rtl">
+    <div className="bg-surface-card border border-surface-border rounded-2xl p-5 mb-6 text-right" dir="rtl">
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div className="flex items-center gap-2">
-          <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
+          <div className="p-2 bg-brand/10 text-brand-light rounded-lg">
             <FileSpreadsheet className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-zinc-100">تحليلات وتصدير Google Sheets</h3>
-            <p className="text-xs text-zinc-400">مزامنة المخازن وحركات المبيعات التشاركية لبراند blackhours</p>
+            <h3 className="font-semibold text-lg text-text-primary">تحليلات وتصدير Google Sheets</h3>
+            <p className="text-xs text-text-secondary">مزامنة المخازن وحركات المبيعات التشاركية لبراند blackhours</p>
           </div>
         </div>
         <button
           onClick={() => setShowConfig(!showConfig)}
-          className="text-xs flex items-center gap-1 text-zinc-400 hover:text-zinc-200 bg-zinc-800 px-2.5 py-1.5 rounded-lg border border-zinc-700 transition"
+          className="text-xs flex items-center gap-1 text-text-secondary hover:text-text-primary bg-surface-card-hover px-2.5 py-1.5 rounded-lg border border-surface-border transition"
         >
           <Key className="w-3.5 h-3.5" />
           {showConfig ? "إخفاء إعدادات الربط" : "إعداد الربط والمطورين"}
@@ -307,7 +307,7 @@ export default function GoogleSheetsSync({
         <div
           className={`flex items-start gap-2.5 p-3.5 rounded-xl text-sm mb-4 ${
             status.type === "success"
-              ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/20"
+              ? "bg-brand/10 text-emerald-300 border border-brand/20"
               : status.type === "error"
               ? "bg-rose-500/10 text-rose-300 border border-rose-500/20"
               : "bg-amber-500/10 text-amber-300 border border-amber-500/20"
@@ -323,32 +323,32 @@ export default function GoogleSheetsSync({
       )}
 
       {showConfig && (
-        <div className="bg-zinc-950 p-4 rounded-xl border border-zinc-850 mb-4 text-xs space-y-3">
-          <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
-            <HelpCircle className="w-4 h-4 text-emerald-400" />
+        <div className="bg-surface-base p-4 rounded-xl border border-surface-border mb-4 text-xs space-y-3">
+          <h4 className="font-semibold text-text-primary flex items-center gap-1.5">
+            <HelpCircle className="w-4 h-4 text-brand-light" />
             كيفية إعداد الربط المباشر مع حسابك على Google:
           </h4>
-          <ol className="list-decimal list-inside space-y-1 text-zinc-400 leading-relaxed pr-1">
-            <li>قم بزيارة لوحة مطوري غوغل <a href="https://console.cloud.google.com" target="_blank" className="text-emerald-400 underline">Google Cloud Console</a>.</li>
+          <ol className="list-decimal list-inside space-y-1 text-text-secondary leading-relaxed pr-1">
+            <li>قم بزيارة لوحة مطوري غوغل <a href="https://console.cloud.google.com" target="_blank" className="text-brand-light underline">Google Cloud Console</a>.</li>
             <li>قم بإنشاء مشروع وتفعيل <strong>Google Sheets API</strong> و <strong>Google Drive API</strong>.</li>
             <li>قم بإنشاء credentials من نوع <strong>Credentials &gt; OAuth client ID</strong> (نوع التطبيق Web).</li>
-            <li>أضف عنوان تطبيقك الحالي (<span className="text-zinc-200 select-all font-mono">{window.location.origin}</span>) في الـ <strong>Authorized redirect URIs</strong>.</li>
+            <li>أضف عنوان تطبيقك الحالي (<span className="text-text-primary select-all font-mono">{window.location.origin}</span>) في الـ <strong>Authorized redirect URIs</strong>.</li>
             <li>الآن انسخ الـ <strong>Client ID</strong> وضعه في الحقل بالأسفل لبدء الربط التلقائي بنقرة واحدة.</li>
           </ol>
 
           <div className="pt-2 space-y-2">
             <div>
-              <label className="block text-[11px] text-zinc-400 mb-1">Google Client ID (معرف المشروع للربط التلقائي):</label>
+              <label className="block text-[11px] text-text-secondary mb-1">Google Client ID (معرف المشروع للربط التلقائي):</label>
               <input
                 type="text"
                 placeholder="مثال: 12345678-abcde.apps.googleusercontent.com"
                 value={clientId}
                 onChange={(e) => setClientId(e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-zinc-200 outline-none focus:border-emerald-500/50 text-[11px] font-mono text-left"
+                className="w-full bg-surface-card border border-surface-border rounded-lg px-3 py-2 text-text-primary outline-none focus:border-brand/50 text-[11px] font-mono text-left"
               />
             </div>
             <div>
-              <label className="block text-[11px] text-zinc-400 mb-1">رمز الوصول المؤقت (أو أدخل يدوياً إذا رغبت):</label>
+              <label className="block text-[11px] text-text-secondary mb-1">رمز الوصول المؤقت (أو أدخل يدوياً إذا رغبت):</label>
               <input
                 type="password"
                 placeholder="تاركاً إياها خالية لحصولك التلقائي بعد تسجيل الدخول"
@@ -357,13 +357,13 @@ export default function GoogleSheetsSync({
                   setAccessToken(e.target.value);
                   localStorage.setItem("g_sheets_access_token", e.target.value);
                 }}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-zinc-200 outline-none focus:border-emerald-500/50 text-[11px] font-mono text-left"
+                className="w-full bg-surface-card border border-surface-border rounded-lg px-3 py-2 text-text-primary outline-none focus:border-brand/50 text-[11px] font-mono text-left"
               />
             </div>
             <button
               type="button"
               onClick={handleOAuthLogin}
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-zinc-100 font-medium py-1.5 rounded-lg transition"
+              className="w-full bg-brand-dark hover:bg-brand text-text-primary font-medium py-1.5 rounded-lg transition"
             >
               تسجيل الدخول وربط حساب Google
             </button>
@@ -374,20 +374,20 @@ export default function GoogleSheetsSync({
       {/* Primary Actions Panel */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Google Sync Column */}
-        <div className="bg-zinc-950 p-4 rounded-xl border border-zinc-850">
+        <div className="bg-surface-base p-4 rounded-xl border border-surface-border">
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span className="text-xs font-semibold text-zinc-300">مزامنة غوغل الفورية</span>
+            <div className="w-2 h-2 rounded-full bg-brand" />
+            <span className="text-xs font-semibold text-text-secondary">مزامنة غوغل الفورية</span>
           </div>
           <div className="space-y-3">
             <div>
-              <label className="block text-[11px] text-zinc-400 mb-1">أدخل معرّف جدول البيانات الحالي (Spreadsheet ID):</label>
+              <label className="block text-[11px] text-text-secondary mb-1">أدخل معرّف جدول البيانات الحالي (Spreadsheet ID):</label>
               <input
                 type="text"
                 placeholder="مثال: 1a2b3c4d5e6f7g8h9i0j..."
                 value={spreadsheetId}
                 onChange={(e) => setSpreadsheetId(e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-850 rounded-lg px-2.5 py-1.5 text-xs text-zinc-200 outline-none focus:border-emerald-500/50 font-mono"
+                className="w-full bg-surface-card border border-surface-border rounded-lg px-2.5 py-1.5 text-xs text-text-primary outline-none focus:border-brand/50 font-mono"
               />
             </div>
 
@@ -396,7 +396,7 @@ export default function GoogleSheetsSync({
                 type="button"
                 onClick={handleSyncExisting}
                 disabled={isLoading}
-                className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs py-2 rounded-lg font-medium transition flex items-center justify-center gap-1.5 border border-zinc-700 disabled:opacity-50"
+                className="flex-1 bg-surface-card-hover hover:bg-surface-border text-text-primary text-xs py-2 rounded-lg font-medium transition flex items-center justify-center gap-1.5 border border-surface-border disabled:opacity-50"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`} />
                 تحديث الشيت الحالية
@@ -417,14 +417,14 @@ export default function GoogleSheetsSync({
                 href={settings.spreadsheetUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="block text-center text-xs text-emerald-400 hover:underline hover:text-emerald-300 pt-1 border-t border-zinc-850"
+                className="block text-center text-xs text-brand-light hover:underline hover:text-emerald-300 pt-1 border-t border-surface-border"
               >
                 فتح جدول البيانات الحالي ↗
               </a>
             )}
 
             {settings.lastSync && (
-              <p className="text-[10px] text-zinc-500 text-center">
+              <p className="text-[10px] text-text-secondary text-center">
                 آخر مزامنة ناجحة: {new Date(settings.lastSync).toLocaleString("ar-EG")}
               </p>
             )}
@@ -432,13 +432,13 @@ export default function GoogleSheetsSync({
         </div>
 
         {/* Offline CSV Download Column */}
-        <div className="bg-zinc-950 p-4 rounded-xl border border-zinc-850 flex flex-col justify-between">
+        <div className="bg-surface-base p-4 rounded-xl border border-surface-border flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 rounded-full bg-sky-400" />
-              <span className="text-xs font-semibold text-zinc-300">تحميل مباشر بنقرة واحدة (بدون إنترنت/صلاحيات)</span>
+              <span className="text-xs font-semibold text-text-secondary">تحميل مباشر بنقرة واحدة (بدون إنترنت/صلاحيات)</span>
             </div>
-            <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
+            <p className="text-xs text-text-secondary mb-4 leading-relaxed">
               تصدير فوري لشاشات، وإكسسوارات، وقطع غيار المحل بصيغة إكسل CSV متوافقة مع الأجهزة المحمولة.
             </p>
           </div>
@@ -446,14 +446,14 @@ export default function GoogleSheetsSync({
           <div className="grid grid-cols-2 gap-2 mt-auto">
             <button
               onClick={() => handleDownloadCSV("stock")}
-              className="bg-zinc-850 hover:bg-zinc-800 text-zinc-100 text-xs py-2 px-3 rounded-lg border border-zinc-750 transition flex items-center justify-center gap-1.5"
+              className="bg-surface-card-hover hover:bg-surface-card-hover text-text-primary text-xs py-2 px-3 rounded-lg border border-surface-border transition flex items-center justify-center gap-1.5"
             >
               <Download className="w-3.5 h-3.5 text-sky-400" />
               تحميل المخزن
             </button>
             <button
               onClick={() => handleDownloadCSV("sales")}
-              className="bg-zinc-850 hover:bg-zinc-800 text-zinc-100 text-xs py-2 px-3 rounded-lg border border-zinc-750 transition flex items-center justify-center gap-1.5"
+              className="bg-surface-card-hover hover:bg-surface-card-hover text-text-primary text-xs py-2 px-3 rounded-lg border border-surface-border transition flex items-center justify-center gap-1.5"
             >
               <Download className="w-3.5 h-3.5 text-sky-400" />
               تحميل المبيعات

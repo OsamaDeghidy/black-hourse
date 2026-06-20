@@ -49,6 +49,15 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
 
+  const [theme, setTheme] = useState<"dark" | "light" | "royal" | "gold">(() => {
+    return (localStorage.getItem("blackhours_theme") as any) || "dark";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("blackhours_theme", theme);
+  }, [theme]);
+
   // Permissions tab routing guard: customers get locked in marketplace. non-admins cannot do admin modules.
   useEffect(() => {
     if (currentUser === "customer") {
@@ -402,22 +411,22 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans pb-24" dir="rtl">
+    <div className="min-h-screen bg-surface-base text-text-primary font-sans pb-24" dir="rtl">
       {/* Top Brand Header styled precisely like requested theme */}
-      <header className="sticky top-0 z-40 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900 px-4 py-4 mb-6">
+      <header className="sticky top-0 z-40 bg-surface-base/80 backdrop-blur-md border-b border-surface-border px-4 py-4 mb-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shrink-0 shadow-lg">
-              <div className="w-6 h-6 border-4 border-black rotate-45"></div>
+            <div className="w-10 h-10 bg-text-primary rounded-lg flex items-center justify-center shrink-0 shadow-lg">
+              <div className="w-6 h-6 border-4 border-surface-base rotate-45"></div>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-black font-display tracking-wider text-white">BLACKHOURS</h1>
-                <span className="bg-neutral-800 text-neutral-400 border border-neutral-700 font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">
+                <h1 className="text-2xl font-black font-display tracking-wider text-text-primary">BLACKHOURS</h1>
+                <span className="bg-surface-card-hover text-text-secondary border border-surface-border font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">
                   {currentUser === "customer" ? "الماركت بليس 🛍️" : "محل جملة"}
                 </span>
               </div>
-              <p className="text-xs text-neutral-500 font-medium mt-0.5">
+              <p className="text-xs text-text-tertiary font-medium mt-0.5">
                 {currentUser === "customer" ? "بوابة المشتري للطلب الفوري وتتبع الشحنات المباشر" : "نظام إدارة البضائع وحركات الفروع اللحظي التشاركي"}
               </p>
             </div>
@@ -425,19 +434,33 @@ export default function App() {
 
           <div className="flex items-center gap-3 flex-wrap justify-end">
             {saveStatus && (
-              <span className="text-[10px] bg-neutral-900 border border-neutral-800 text-neutral-400 px-3 py-1 rounded-xl font-mono">
+              <span className="text-[10px] bg-surface-card border border-surface-border text-text-secondary px-3 py-1 rounded-xl font-mono">
                 {saveStatus}
               </span>
             )}
-            <div className="bg-neutral-900 border border-neutral-850 rounded-2xl px-3 py-1.5 text-xs text-neutral-300 flex items-center gap-2">
-              <UserCheck className="w-4 h-4 text-emerald-400" />
-              <span>المستخدم: <strong className="text-white capitalize font-sans">{currentUser === "customer" ? "زبون متجر" : currentUser}</strong></span>
+            <div className="bg-surface-card border border-surface-border rounded-2xl px-3 py-1.5 text-xs text-text-secondary flex items-center gap-2">
+              <UserCheck className="w-4 h-4 text-brand-light" />
+              <span>المستخدم: <strong className="text-text-primary capitalize font-sans">{currentUser === "customer" ? "زبون متجر" : currentUser}</strong></span>
               {currentUser !== "admin" && currentUser !== "customer" && (
-                <span className="text-[10px] bg-neutral-800 px-1.5 py-0.5 rounded font-black text-zinc-400">
+                <span className="text-[10px] bg-surface-card-hover px-1.5 py-0.5 rounded font-black text-text-secondary">
                   {currentUser === "user 1" ? "فرع 1" : "فرع 2"}
                 </span>
               )}
             </div>
+            
+            {currentUser === "admin" && (
+              <select 
+                value={theme}
+                onChange={(e) => setTheme(e.target.value as any)}
+                className="bg-surface-card border border-surface-border rounded-xl px-2 py-1.5 text-xs text-text-primary focus:outline-none focus:ring-2 focus:ring-brand cursor-pointer"
+                title="تغيير ثيم النظام"
+              >
+                <option value="dark">Dark Premium (ليلي فاخر)</option>
+                <option value="light">Light Modern (نهاري ساطع)</option>
+                <option value="royal">Royal Dark (فخم)</option>
+                <option value="gold">Luxury Gold (ذهبي)</option>
+              </select>
+            )}
             <button
               onClick={handleLogout}
               className="bg-rose-950/40 text-rose-400 border border-rose-900/45 p-2 rounded-xl hover:bg-rose-900/40 transition text-xs flex items-center gap-1 font-bold"
@@ -458,8 +481,8 @@ export default function App() {
       <main className="max-w-6xl mx-auto px-4 space-y-6">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-3">
-            <div className="w-10 h-10 border-4 border-neutral-200 border-t-transparent rounded-full animate-spin" />
-            <p className="text-sm text-neutral-400">جاري تهيئة لوحة تحكم blackhours وجلب البضائع...</p>
+            <div className="w-10 h-10 border-4 border-text-secondary border-t-transparent rounded-full animate-spin" />
+            <p className="text-sm text-text-secondary">جاري تهيئة لوحة تحكم blackhours وجلب البضائع...</p>
           </div>
         ) : (
           <>
@@ -467,33 +490,33 @@ export default function App() {
             {currentUser !== "customer" && (
               <div className={`grid grid-cols-1 gap-4 ${currentUser === "admin" ? "md:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-2"}`}>
               {/* Stat 1 - Branch 1 */}
-              <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 flex flex-col justify-between hover:border-neutral-700 transition duration-300">
+              <div className="bg-surface-card border border-surface-border rounded-3xl p-5 flex flex-col justify-between hover:border-surface-border transition duration-300">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-neutral-400 text-xs font-semibold">بضائع فرع 1</span>
+                  <span className="text-text-secondary text-xs font-semibold">بضائع فرع 1</span>
                   <span className="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded border border-blue-400/20 font-bold uppercase">فرع 1</span>
                 </div>
                 <div>
-                  <p className="text-3xl font-black text-white font-mono">{totalStockBranch1}</p>
-                  <p className="text-[10px] text-neutral-500 mt-1">حالة التخزين وسعة العرض</p>
+                  <p className="text-3xl font-black text-text-primary font-mono">{totalStockBranch1}</p>
+                  <p className="text-[10px] text-text-tertiary mt-1">حالة التخزين وسعة العرض</p>
                   
-                  <div className="h-1.5 w-full bg-neutral-800 rounded-full overflow-hidden mt-3">
+                  <div className="h-1.5 w-full bg-surface-card-hover rounded-full overflow-hidden mt-3">
                     <div className="h-full bg-blue-500 rounded-full transition-all duration-500" style={{ width: '85%' }}></div>
                   </div>
-                  <div className="text-[9px] text-neutral-500 mt-1.5 text-left">سعة تخزين مستغلة 85%</div>
+                  <div className="text-[9px] text-text-tertiary mt-1.5 text-left">سعة تخزين مستغلة 85%</div>
                 </div>
               </div>
 
               {/* Stat 2 - Branch 2 */}
-              <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 flex flex-col justify-between hover:border-neutral-700 transition duration-300">
+              <div className="bg-surface-card border border-surface-border rounded-3xl p-5 flex flex-col justify-between hover:border-surface-border transition duration-300">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-neutral-400 text-xs font-semibold">بضائع فرع 2</span>
+                  <span className="text-text-secondary text-xs font-semibold">بضائع فرع 2</span>
                   <span className="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded border border-orange-400/20 font-bold uppercase">فرع 2</span>
                 </div>
                 <div>
-                  <p className="text-3xl font-black text-white font-mono">{totalStockBranch2}</p>
-                  <p className="text-[10px] text-neutral-500 mt-1">تتبع التزامن بالمخزن</p>
+                  <p className="text-3xl font-black text-text-primary font-mono">{totalStockBranch2}</p>
+                  <p className="text-[10px] text-text-tertiary mt-1">تتبع التزامن بالمخزن</p>
 
-                  <div className="h-1.5 w-full bg-neutral-800 rounded-full overflow-hidden mt-3">
+                  <div className="h-1.5 w-full bg-surface-card-hover rounded-full overflow-hidden mt-3">
                     <div className="h-full bg-orange-500 rounded-full transition-all duration-500" style={{ width: '30%' }}></div>
                   </div>
                   <div className="text-[9px] text-orange-400 mt-1.5 text-left">تنبيه: سعة متوفرة للشحن (30%)</div>
@@ -503,43 +526,43 @@ export default function App() {
               {currentUser === "admin" && (
                 <>
                   {/* Stat 3 - Financial Capital block */}
-                  <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 flex flex-col justify-between hover:border-neutral-700 transition duration-300">
+                  <div className="bg-surface-card border border-surface-border rounded-3xl p-5 flex flex-col justify-between hover:border-surface-border transition duration-300">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-neutral-400 text-xs font-semibold">إجمالي رأس مال البضاعة</span>
+                      <span className="text-text-secondary text-xs font-semibold">إجمالي رأس مال البضاعة</span>
                       <span className="text-[10px] bg-amber-500/25 text-amber-400 px-2 py-0.5 rounded border border-amber-400/20 font-bold uppercase font-mono">VALUATION</span>
                     </div>
                     <div>
-                      <p className="text-3xl font-black text-white font-mono">
-                        {totalInventoryWholesaleValue.toLocaleString("ar-EG")} <span className="text-xs text-neutral-400 font-sans">EGP</span>
+                      <p className="text-3xl font-black text-text-primary font-mono">
+                        {totalInventoryWholesaleValue.toLocaleString("ar-EG")} <span className="text-xs text-text-secondary font-sans">EGP</span>
                       </p>
-                      <p className="text-[10px] text-neutral-500 mt-1">المحسوبة بسعر الجملة الرسمي الحالي</p>
+                      <p className="text-[10px] text-text-tertiary mt-1">المحسوبة بسعر الجملة الرسمي الحالي</p>
                       
-                      <div className="h-1.5 w-full bg-neutral-800 rounded-full overflow-hidden mt-3">
+                      <div className="h-1.5 w-full bg-surface-card-hover rounded-full overflow-hidden mt-3">
                         <div className="h-full bg-amber-500 rounded-full" style={{ width: '65%' }}></div>
                       </div>
-                      <div className="text-[9px] text-neutral-500 mt-1.5 text-left">توزيع السيولة متوازن</div>
+                      <div className="text-[9px] text-text-tertiary mt-1.5 text-left">توزيع السيولة متوازن</div>
                     </div>
                   </div>
 
                   {/* Stat 4 - Large Card custom gradient look for Bento */}
-                  <div className="bg-gradient-to-br from-neutral-900 to-neutral-800 border border-neutral-700 rounded-3xl p-5 flex flex-col justify-between hover:border-neutral-600 transition duration-300">
+                  <div className="bg-gradient-to-br from-surface-card to-surface-card-hover border border-surface-border rounded-3xl p-5 flex flex-col justify-between transition duration-300 shadow-sm">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-neutral-300 text-xs font-bold uppercase tracking-widest font-display">المبيعات والأرباح الكلية</span>
-                      <span className="text-[10px] bg-cyan-400 text-neutral-950 px-2 py-0.5 rounded font-bold">نشط</span>
+                       <span className="text-text-primary text-xs font-bold uppercase tracking-widest font-display">المبيعات والأرباح الكلية</span>
+                      <span className="text-[10px] bg-brand text-surface-base px-2 py-0.5 rounded font-bold">نشط</span>
                     </div>
                     <div>
                       <div className="flex justify-between items-baseline mb-1">
-                        <span className="text-2xl font-black text-cyan-400 font-mono">+{totalRevenue.toLocaleString("ar-EG")} ج.م</span>
-                        <span className="text-[11px] text-neutral-300">({totalSalesCount} مبيعة)</span>
+                        <span className="text-2xl font-black text-brand font-mono">+{totalRevenue.toLocaleString("ar-EG")} ج.م</span>
+                        <span className="text-[11px] text-text-secondary">({totalSalesCount} مبيعة)</span>
                       </div>
                       <p className="text-xs text-emerald-300 font-semibold">
                         الأرباح الصافية الحالية: {totalProfit.toLocaleString("ar-EG")} ج.م
                       </p>
 
-                      <div className="h-1.5 w-full bg-neutral-800 rounded-full overflow-hidden mt-3">
+                      <div className="h-1.5 w-full bg-surface-card-hover rounded-full overflow-hidden mt-3">
                         <div className="h-full bg-cyan-400 rounded-full" style={{ width: '100%' }}></div>
                       </div>
-                      <div className="text-[9px] text-neutral-400 mt-1.5 text-left">معدل تحويل فائق</div>
+                      <div className="text-[9px] text-text-secondary mt-1.5 text-left">معدل تحويل فائق</div>
                     </div>
                   </div>
                 </>
@@ -549,17 +572,17 @@ export default function App() {
 
             {/* Notification / Alert Bar for Low Stock */}
             {currentUser !== "customer" && lowStockItems.length > 0 && (
-              <div className="bg-amber-500/10 border border-amber-500/25 text-amber-300 rounded-3xl p-5 flex items-center justify-between flex-wrap gap-4 text-xs">
+              <div className="bg-orange-500/10 border border-orange-500/20 text-orange-500 dark:text-orange-400 rounded-3xl p-5 flex items-center justify-between flex-wrap gap-4 text-xs">
                 <div className="flex items-center gap-3">
-                  <AlertTriangle className="w-6 h-6 text-amber-400 animate-bounce shrink-0" />
+                  <AlertTriangle className="w-6 h-6 animate-bounce shrink-0" />
                   <div>
                     <span className="font-bold block text-sm mb-0.5">تنبيه بضائع حرجة ونواقص</span>
-                    <span className="text-neutral-300">يوجد عدد ({lowStockItems.length}) من قطع الغيار أو الإكسسوارات تحت حد الأمان المطلوب!</span>
+                    <span className="text-orange-600 dark:text-orange-300 opacity-90">يوجد عدد ({lowStockItems.length}) من قطع الغيار أو الإكسسوارات تحت حد الأمان المطلوب!</span>
                   </div>
                 </div>
                 <button
                   onClick={() => setActiveTab("inventory")}
-                  className="bg-white hover:bg-neutral-200 text-black font-bold px-4 py-2 rounded-2xl text-xs transition duration-200 shadow-md transform hover:scale-105"
+                  className="bg-surface-card hover:bg-surface-card-hover text-text-primary font-bold px-4 py-2 rounded-2xl text-xs transition duration-200 border border-surface-border"
                 >
                   عرض النواقص للتعديل
                 </button>
@@ -575,33 +598,33 @@ export default function App() {
                 onAddLog={handleAddLog}
               />
             ) : (
-              <div className="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="bg-surface-card border border-surface-border rounded-3xl overflow-hidden shadow-2xl">
               {/* Inner Desk Menu */}
-              <div className="bg-neutral-950 border-b border-neutral-850 flex justify-around md:justify-start gap-1 p-2.5 overflow-x-auto">
+              <div className="bg-surface-base border-b border-surface-border flex justify-around md:justify-start gap-1 p-2.5 overflow-x-auto">
                 {currentUser === "admin" && (
                   <button
                     onClick={() => setActiveTab("dashboard")}
                     className={`px-5 py-3 rounded-2xl text-xs font-bold transition flex items-center gap-2 shrink-0 ${
-                      activeTab === "dashboard" ? "bg-neutral-800 text-white border border-neutral-700/50 shadow-inner" : "text-neutral-400 hover:text-neutral-200"
+                      activeTab === "dashboard" ? "bg-surface-card-hover text-text-primary border border-surface-border/50 shadow-inner" : "text-text-secondary hover:text-text-primary"
                     }`}
                   >
-                    <Activity className="w-4 h-4 text-cyan-400" />
+                    <Activity className="w-4 h-4 text-brand-light" />
                     لوحة الأداء العام
                   </button>
                 )}
                 <button
                   onClick={() => setActiveTab("sales")}
                   className={`px-5 py-3 rounded-2xl text-xs font-bold transition flex items-center gap-2 shrink-0 ${
-                    activeTab === "sales" ? "bg-neutral-800 text-white border border-neutral-700/50 shadow-inner" : "text-neutral-400 hover:text-neutral-200"
+                    activeTab === "sales" ? "bg-surface-card-hover text-text-primary border border-surface-border/50 shadow-inner" : "text-text-secondary hover:text-text-primary"
                   }`}
                 >
-                  <ShoppingCart className="w-4 h-4 text-emerald-400" />
+                  <ShoppingCart className="w-4 h-4 text-brand-light" />
                   البيع والمبيعات الكلية
                 </button>
                 <button
                   onClick={() => setActiveTab("inventory")}
                   className={`px-5 py-3 rounded-2xl text-xs font-bold transition flex items-center gap-2 shrink-0 ${
-                    activeTab === "inventory" ? "bg-neutral-800 text-white border border-neutral-700/50 shadow-inner" : "text-neutral-400 hover:text-neutral-200"
+                    activeTab === "inventory" ? "bg-surface-card-hover text-text-primary border border-surface-border/50 shadow-inner" : "text-text-secondary hover:text-text-primary"
                   }`}
                 >
                   <Store className="w-4 h-4 text-orange-400" />
@@ -610,13 +633,13 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab("orders")}
                   className={`px-5 py-3 rounded-2xl text-xs font-semibold transition flex items-center gap-2 shrink-0 relative ${
-                    activeTab === "orders" ? "bg-neutral-800 text-white border border-neutral-700/50 shadow-inner" : "text-neutral-400 hover:text-neutral-200"
+                    activeTab === "orders" ? "bg-surface-card-hover text-text-primary border border-surface-border/50 shadow-inner" : "text-text-secondary hover:text-text-primary"
                   }`}
                 >
-                  <ShoppingBag className="w-4 h-4 text-cyan-400" />
+                  <ShoppingBag className="w-4 h-4 text-brand-light" />
                   إدارة طلبات الماركت بليس
                   {((dataState.orders?.filter((o) => o.status === "pending" || o.delayContactRequested).length) ?? 0) > 0 && (
-                    <span className="bg-amber-500 text-neutral-950 font-black text-[9px] px-1.5 py-0.5 rounded-full ml-1">
+                    <span className="bg-amber-500 text-text-tertiary font-black text-[9px] px-1.5 py-0.5 rounded-full ml-1">
                       {dataState.orders?.filter((o) => o.status === "pending" || o.delayContactRequested).length}
                     </span>
                   )}
@@ -624,10 +647,10 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab("assistant")}
                   className={`px-5 py-3 rounded-2xl text-xs font-bold transition flex items-center gap-2 shrink-0 ${
-                    activeTab === "assistant" ? "bg-neutral-800 text-white border border-neutral-700/50 shadow-inner" : "text-neutral-400 hover:text-neutral-200"
+                    activeTab === "assistant" ? "bg-surface-card-hover text-text-primary border border-surface-border/50 shadow-inner" : "text-text-secondary hover:text-text-primary"
                   }`}
                 >
-                  <Bot className="w-4 h-4 text-cyan-400 animate-pulse" />
+                  <Bot className="w-4 h-4 text-brand-light animate-pulse" />
                   مساعد blackhours الذكي
                 </button>
                 {currentUser === "admin" && (
@@ -635,7 +658,7 @@ export default function App() {
                     <button
                       onClick={() => setActiveTab("sync")}
                       className={`px-5 py-3 rounded-2xl text-xs font-bold transition flex items-center gap-2 shrink-0 relative ${
-                        activeTab === "sync" ? "bg-neutral-800 text-white border border-neutral-700/50 shadow-inner" : "text-neutral-400 hover:text-neutral-200"
+                        activeTab === "sync" ? "bg-surface-card-hover text-text-primary border border-surface-border/50 shadow-inner" : "text-text-secondary hover:text-text-primary"
                       }`}
                     >
                       <FileSpreadsheet className="w-4 h-4 text-green-400" />
@@ -648,13 +671,13 @@ export default function App() {
                     <button
                       onClick={() => setActiveTab("audit")}
                       className={`px-5 py-3 rounded-2xl text-xs font-bold transition flex items-center gap-2 shrink-0 relative ${
-                        activeTab === "audit" ? "bg-neutral-800 text-white border border-neutral-700/50 shadow-inner" : "text-neutral-400 hover:text-neutral-200"
+                        activeTab === "audit" ? "bg-surface-card-hover text-text-primary border border-surface-border/50 shadow-inner" : "text-text-secondary hover:text-text-primary"
                       }`}
                     >
-                      <ShieldCheck className="w-4 h-4 text-emerald-400 hover:animate-pulse" />
+                      <ShieldCheck className="w-4 h-4 text-brand-light hover:animate-pulse" />
                       الرقابة وصلاحيات الموظفين
                       {(dataState.requests?.filter((r) => r.status === "pending").length ?? 0) > 0 && (
-                        <span className="bg-amber-500 text-neutral-950 font-black text-[10px] px-2 py-0.5 rounded-full animate-pulse ml-1">
+                        <span className="bg-amber-500 text-text-tertiary font-black text-[10px] px-2 py-0.5 rounded-full animate-pulse ml-1">
                           {dataState.requests?.filter((r) => r.status === "pending").length} طلبات معلقة
                         </span>
                       )}
@@ -670,97 +693,97 @@ export default function App() {
                     {/* Performance split widget */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Branch 1 Performance card */}
-                      <div className="bg-neutral-950 p-6 rounded-3xl border border-neutral-850 flex flex-col justify-between">
+                      <div className="bg-surface-base p-6 rounded-3xl border border-surface-border flex flex-col justify-between">
                         <div>
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-2">
                               <div className="w-3.5 h-3.5 rounded-full bg-blue-500" />
-                              <h4 className="font-bold text-sm text-neutral-100">تحليل مبيعات فرع 1</h4>
+                              <h4 className="font-bold text-sm text-text-primary">تحليل مبيعات فرع 1</h4>
                             </div>
-                            <span className="text-[10px] text-neutral-500 font-mono">فرع 1 الرئيسي</span>
+                            <span className="text-[10px] text-text-tertiary font-mono">فرع 1 الرئيسي</span>
                           </div>
                           <div className="space-y-3.5 text-xs mb-5">
                             <div className="flex justify-between">
-                              <span className="text-neutral-400">حجم مبيعات الفرع:</span>
-                              <span className="font-bold text-neutral-200 text-sm font-mono">{branch1SalesTotal} ج.م</span>
+                              <span className="text-text-secondary">حجم مبيعات الفرع:</span>
+                              <span className="font-bold text-text-primary text-sm font-mono">{branch1SalesTotal} ج.م</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-neutral-400">الأرباح الصافية المحققة:</span>
-                              <span className="font-bold text-emerald-400 text-sm font-mono">+{branch1ProfitTotal} ج.م</span>
+                              <span className="text-text-secondary">الأرباح الصافية المحققة:</span>
+                              <span className="font-bold text-brand-light text-sm font-mono">+{branch1ProfitTotal} ج.م</span>
                             </div>
                           </div>
                         </div>
                         <div>
                           {/* Custom Chart Bar */}
-                          <div className="w-full bg-neutral-900 rounded-full h-2 overflow-hidden">
+                          <div className="w-full bg-surface-card rounded-full h-2 overflow-hidden">
                             <div 
                               className="bg-blue-500 h-full rounded-full transition-all duration-1000"
                               style={{ width: `${totalRevenue ? (branch1SalesTotal / totalRevenue) * 100 : 0}%` }}
                             />
                           </div>
-                          <p className="text-[10px] text-neutral-400 text-center mt-2.5">
-                            يمثل <strong className="font-bold text-white font-mono">{totalRevenue ? Math.round((branch1SalesTotal / totalRevenue) * 100) : 0}%</strong> من إجمالي مبيعات المحل
+                          <p className="text-[10px] text-text-secondary text-center mt-2.5">
+                            يمثل <strong className="font-bold text-text-primary font-mono">{totalRevenue ? Math.round((branch1SalesTotal / totalRevenue) * 100) : 0}%</strong> من إجمالي مبيعات المحل
                           </p>
                         </div>
                       </div>
 
                       {/* Branch 2 Performance card */}
-                      <div className="bg-neutral-950 p-6 rounded-3xl border border-neutral-850 flex flex-col justify-between">
+                      <div className="bg-surface-base p-6 rounded-3xl border border-surface-border flex flex-col justify-between">
                         <div>
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-2">
                               <div className="w-3.5 h-3.5 rounded-full bg-orange-500" />
-                              <h4 className="font-bold text-sm text-neutral-100">تحليل مبيعات فرع 2</h4>
+                              <h4 className="font-bold text-sm text-text-primary">تحليل مبيعات فرع 2</h4>
                             </div>
-                            <span className="text-[10px] text-neutral-500 font-mono font-bold">فرع 2</span>
+                            <span className="text-[10px] text-text-tertiary font-mono font-bold">فرع 2</span>
                           </div>
                           <div className="space-y-3.5 text-xs mb-5">
                             <div className="flex justify-between">
-                              <span className="text-neutral-400">حجم مبيعات الفرع:</span>
-                              <span className="font-bold text-neutral-200 text-sm font-mono">{branch2SalesTotal} ج.م</span>
+                              <span className="text-text-secondary">حجم مبيعات الفرع:</span>
+                              <span className="font-bold text-text-primary text-sm font-mono">{branch2SalesTotal} ج.م</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-neutral-400">الأرباح الصافية المحققة:</span>
-                              <span className="font-bold text-emerald-400 text-sm font-mono">+{branch2ProfitTotal} ج.م</span>
+                              <span className="text-text-secondary">الأرباح الصافية المحققة:</span>
+                              <span className="font-bold text-brand-light text-sm font-mono">+{branch2ProfitTotal} ج.م</span>
                             </div>
                           </div>
                         </div>
                         <div>
                           {/* Custom Chart Bar */}
-                          <div className="w-full bg-neutral-900 rounded-full h-2 overflow-hidden">
+                          <div className="w-full bg-surface-card rounded-full h-2 overflow-hidden">
                             <div 
                               className="bg-orange-500 h-full rounded-full transition-all duration-1000"
                               style={{ width: `${totalRevenue ? (branch2SalesTotal / totalRevenue) * 100 : 0}%` }}
                             />
                           </div>
-                          <p className="text-[10px] text-neutral-400 text-center mt-2.5">
-                            يمثل <strong className="font-bold text-white font-mono">{totalRevenue ? Math.round((branch2SalesTotal / totalRevenue) * 100) : 0}%</strong> من إجمالي مبيعات المحل
+                          <p className="text-[10px] text-text-secondary text-center mt-2.5">
+                            يمثل <strong className="font-bold text-text-primary font-mono">{totalRevenue ? Math.round((branch2SalesTotal / totalRevenue) * 100) : 0}%</strong> من إجمالي مبيعات المحل
                           </p>
                         </div>
                       </div>
                     </div>
 
                     {/* Quick Overview Guidelines */}
-                    <div className="bg-neutral-950 p-6 rounded-3xl border border-neutral-850">
-                      <h4 className="font-bold text-neutral-200 mb-4 flex items-center gap-2 text-sm">
-                        <Smartphone className="w-5 h-5 text-cyan-400" />
+                    <div className="bg-surface-base p-6 rounded-3xl border border-surface-border">
+                      <h4 className="font-bold text-text-primary mb-4 flex items-center gap-2 text-sm">
+                        <Smartphone className="w-5 h-5 text-brand-light" />
                         دليل نظام blackhours المطور:
                       </h4>
-                      <p className="text-xs text-neutral-400 leading-relaxed max-w-4xl mb-6">
+                      <p className="text-xs text-text-secondary leading-relaxed max-w-4xl mb-6">
                         نظام تسيير بضائع blackhours لقطع الهاتف بالجملة يضمن المزامنة الذكية والدقة بين فرعي المحل. عندما تقوم بأي عملية بيع أو تعديل أو تحويل للبضائع، يتم تحديث مخزون كلا الفرعين فوراً مع التحقق الذكي من توفر السلعة.
                       </p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                        <div className="p-4 bg-neutral-900 border border-neutral-800 rounded-2xl space-y-2">
-                          <span className="font-bold text-cyan-400 block text-xs">📦 المزامنة الفورية</span>
-                          <span className="text-neutral-400 leading-relaxed">عندما تنفذ القطع في فرع محدد ويقوم العميل بشرائها، يسحبها النظام تلقائياً من الفرع الآخر لموازنة الاحتياج الفوري.</span>
+                        <div className="p-4 bg-surface-card border border-surface-border rounded-2xl space-y-2">
+                          <span className="font-bold text-brand-light block text-xs">📦 المزامنة الفورية</span>
+                          <span className="text-text-secondary leading-relaxed">عندما تنفذ القطع في فرع محدد ويقوم العميل بشرائها، يسحبها النظام تلقائياً من الفرع الآخر لموازنة الاحتياج الفوري.</span>
                         </div>
-                        <div className="p-4 bg-neutral-900 border border-neutral-800 rounded-2xl space-y-2">
+                        <div className="p-4 bg-surface-card border border-surface-border rounded-2xl space-y-2">
                           <span className="font-bold text-orange-400 block text-xs">🤖 سيناريوهات التخيل</span>
-                          <span className="text-neutral-400 leading-relaxed">المساعد المدعوم بـ Gemini يقوم بحساب توقعات الربح ونسب التحويل من فرع لآخر بناء على حركة البيع الحالية.</span>
+                          <span className="text-text-secondary leading-relaxed">المساعد المدعوم بـ Gemini يقوم بحساب توقعات الربح ونسب التحويل من فرع لآخر بناء على حركة البيع الحالية.</span>
                         </div>
-                        <div className="p-4 bg-neutral-900 border border-neutral-800 rounded-2xl space-y-2">
+                        <div className="p-4 bg-surface-card border border-surface-border rounded-2xl space-y-2">
                           <span className="font-bold text-green-400 block text-xs">🟢 التكامل مع Google Sheets</span>
-                          <span className="text-neutral-400 leading-relaxed">تصدير لوائح الجرد وسجلات المبيعات إلى جوجل شيتس لحفظ التقارير مع صلاحية سحابية كاملة.</span>
+                          <span className="text-text-secondary leading-relaxed">تصدير لوائح الجرد وسجلات المبيعات إلى جوجل شيتس لحفظ التقارير مع صلاحية سحابية كاملة.</span>
                         </div>
                       </div>
                     </div>
@@ -854,12 +877,12 @@ export default function App() {
 
       {/* Mobile-First Optimized Bottom Navigation Bar */}
       {currentUser !== "customer" && (
-        <div className="fixed bottom-0 left-0 right-0 bg-neutral-950 border-t border-neutral-900 px-2 py-2 flex items-center justify-around z-40 md:hidden">
+        <div className="fixed bottom-0 left-0 right-0 bg-surface-base border-t border-surface-border px-2 py-2 flex items-center justify-around z-40 md:hidden">
           {currentUser === "admin" && (
             <button
               onClick={() => setActiveTab("dashboard")}
               className={`flex flex-col items-center gap-1 p-1.5 transition ${
-                activeTab === "dashboard" ? "text-cyan-400" : "text-neutral-500"
+                activeTab === "dashboard" ? "text-brand-light" : "text-text-tertiary"
               }`}
             >
               <Activity className="w-5 h-5" />
@@ -869,7 +892,7 @@ export default function App() {
           <button
             onClick={() => setActiveTab("sales")}
             className={`flex flex-col items-center gap-1 p-1.5 transition ${
-              activeTab === "sales" ? "text-cyan-400" : "text-neutral-500"
+              activeTab === "sales" ? "text-brand-light" : "text-text-tertiary"
             }`}
           >
             <ShoppingCart className="w-5 h-5" />
@@ -878,7 +901,7 @@ export default function App() {
           <button
             onClick={() => setActiveTab("inventory")}
             className={`flex flex-col items-center gap-1 p-1.5 transition ${
-              activeTab === "inventory" ? "text-cyan-400" : "text-neutral-500"
+              activeTab === "inventory" ? "text-brand-light" : "text-text-tertiary"
             }`}
           >
             <Store className="w-5 h-5" />
@@ -887,13 +910,13 @@ export default function App() {
           <button
             onClick={() => setActiveTab("orders")}
             className={`flex flex-col items-center gap-1 p-1.5 transition relative ${
-              activeTab === "orders" ? "text-cyan-400" : "text-neutral-500"
+              activeTab === "orders" ? "text-brand-light" : "text-text-tertiary"
             }`}
           >
             <ShoppingBag className="w-5 h-5" />
             <span className="text-[9px] font-bold">الطلبات</span>
             {((dataState.orders?.filter((o) => o.status === "pending" || o.delayContactRequested).length) ?? 0) > 0 && (
-              <span className="bg-amber-500 text-neutral-950 font-black text-[8px] absolute top-1 right-3 px-1 rounded-full">
+              <span className="bg-amber-500 text-text-tertiary font-black text-[8px] absolute top-1 right-3 px-1 rounded-full">
                 {dataState.orders?.filter((o) => o.status === "pending" || o.delayContactRequested).length}
               </span>
             )}
@@ -901,7 +924,7 @@ export default function App() {
           <button
             onClick={() => setActiveTab("assistant")}
             className={`flex flex-col items-center gap-1 p-1.5 transition ${
-              activeTab === "assistant" ? "text-cyan-400" : "text-neutral-500"
+              activeTab === "assistant" ? "text-brand-light" : "text-text-tertiary"
             }`}
           >
             <Bot className="w-5 h-5" />
@@ -912,7 +935,7 @@ export default function App() {
               <button
                 onClick={() => setActiveTab("sync")}
                 className={`flex flex-col items-center gap-1 p-1.5 transition ${
-                  activeTab === "sync" ? "text-cyan-400" : "text-neutral-500"
+                  activeTab === "sync" ? "text-brand-light" : "text-text-tertiary"
                 }`}
               >
                 <FileSpreadsheet className="w-5 h-5" />
@@ -921,7 +944,7 @@ export default function App() {
               <button
                 onClick={() => setActiveTab("audit")}
                 className={`flex flex-col items-center gap-1 p-1.5 transition ${
-                  activeTab === "audit" ? "text-cyan-400" : "text-neutral-500"
+                  activeTab === "audit" ? "text-brand-light" : "text-text-tertiary"
                 }`}
               >
                 <ShieldCheck className="w-5 h-5" />

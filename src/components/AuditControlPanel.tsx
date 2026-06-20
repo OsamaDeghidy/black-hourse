@@ -58,19 +58,19 @@ export default function AuditControlPanel({
   return (
     <div className="space-y-8 text-right" dir="rtl">
       {/* Top Welcome Control Card */}
-      <div className="bg-gradient-to-r from-zinc-900 to-neutral-900 border border-neutral-800 rounded-3xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-gradient-to-r from-zinc-900 to-neutral-900 border border-surface-border rounded-3xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/20">
+          <div className="w-12 h-12 bg-brand/10 text-brand-light rounded-2xl flex items-center justify-center border border-brand/20">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+            <h3 className="text-lg font-bold text-text-primary flex items-center gap-2">
               مركز الرقابة الأمنية وحماية الصلاحيات بمخاطر التلاعب
-              <span className="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-sans font-bold">
+              <span className="text-xs bg-brand/20 text-brand-light border border-brand/30 px-2 py-0.5 rounded-full font-sans font-bold">
                 نشط بأمان
               </span>
             </h3>
-            <p className="text-xs text-neutral-400 mt-1">تتبع تعديلات مستخدمي الفرعين، اعتماد طلبات تعديل الأسعار، ومراقبة التلاعب في كميات قطع الغيار والمخزون في الوقت الحقيقي.</p>
+            <p className="text-xs text-text-secondary mt-1">تتبع تعديلات مستخدمي الفرعين، اعتماد طلبات تعديل الأسعار، ومراقبة التلاعب في كميات قطع الغيار والمخزون في الوقت الحقيقي.</p>
           </div>
         </div>
 
@@ -81,7 +81,7 @@ export default function AuditControlPanel({
                 onClearLogs();
               }
             }}
-            className="text-xs bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:bg-rose-500 hover:text-white px-4 py-2.5 rounded-xl transition duration-200 self-start md:self-auto cursor-pointer"
+            className="text-xs bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:bg-rose-500 hover:text-text-primary px-4 py-2.5 rounded-xl transition duration-200 self-start md:self-auto cursor-pointer"
           >
             تفريغ المحفوظات والسجلات
           </button>
@@ -93,11 +93,11 @@ export default function AuditControlPanel({
         
         {/* Left Column (9 cols for Admin, or 12 for standard users): Modification requests queue */}
         <div className="lg:col-span-6 space-y-6">
-          <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6">
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-4 mb-4">
+          <div className="bg-surface-card border border-surface-border rounded-3xl p-6">
+            <div className="flex items-center justify-between border-b border-surface-border pb-4 mb-4">
               <div className="flex items-center gap-2">
                 <FileCheck className="w-5 h-5 text-amber-400" />
-                <h4 className="font-bold text-sm text-neutral-100">
+                <h4 className="font-bold text-sm text-text-primary">
                   طلبات تعديل الأصناف والأسعار المعلقة لتفادي التلاعب ({pendingRequests.length})
                 </h4>
               </div>
@@ -105,29 +105,29 @@ export default function AuditControlPanel({
             </div>
 
             {pendingRequests.length === 0 ? (
-              <div className="py-12 text-center text-zinc-500 space-y-2">
-                <CheckCircle className="w-10 h-10 text-emerald-500/30 mx-auto" />
+              <div className="py-12 text-center text-text-secondary space-y-2">
+                <CheckCircle className="w-10 h-10 text-brand/30 mx-auto" />
                 <p className="text-xs font-medium">لا توجد طلبات تعديل معلقة حالياً!</p>
-                <p className="text-[10px] text-neutral-500">كافة تعديلات الموظفين متطابقة أو معتمدة بالكامل.</p>
+                <p className="text-[10px] text-text-tertiary">كافة تعديلات الموظفين متطابقة أو معتمدة بالكامل.</p>
               </div>
             ) : (
               <div className="space-y-4 max-h-[460px] overflow-y-auto pr-1">
                 {pendingRequests.map((req) => (
                   <div 
                     key={req.id} 
-                    className="p-4 bg-neutral-950 border border-neutral-850 hover:border-amber-500/30 transition duration-200 rounded-2xl relative space-y-3"
+                    className="p-4 bg-surface-base border border-surface-border hover:border-amber-500/30 transition duration-200 rounded-2xl relative space-y-3"
                   >
                     {/* Header */}
                     <div className="flex justify-between items-start">
                       <div>
-                        <span className="text-xs font-bold text-white block mb-0.5">{req.productName}</span>
-                        <div className="flex gap-2 items-center text-[10px] text-neutral-400">
-                          <span className="bg-neutral-900 px-1.5 py-0.5 rounded text-neutral-300 flex items-center gap-1 font-bold">
-                            <User className="w-3 h-3 text-cyan-400" />
+                        <span className="text-xs font-bold text-text-primary block mb-0.5">{req.productName}</span>
+                        <div className="flex gap-2 items-center text-[10px] text-text-secondary">
+                          <span className="bg-surface-card px-1.5 py-0.5 rounded text-text-secondary flex items-center gap-1 font-bold">
+                            <User className="w-3 h-3 text-brand-light" />
                             بواسطة: {req.requestedBy}
                           </span>
                           <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3 text-neutral-500" />
+                            <Clock className="w-3 h-3 text-text-tertiary" />
                             {new Date(req.requestedAt).toLocaleString("ar-EG")}
                           </span>
                         </div>
@@ -138,74 +138,74 @@ export default function AuditControlPanel({
                     </div>
 
                     {/* Compare old and proposed values cleanly */}
-                    <div className="bg-neutral-900/60 p-3 rounded-xl border border-neutral-850 text-xs text-neutral-300 space-y-2">
-                      <p className="font-bold text-[10px] text-neutral-400 border-b border-zinc-800 pb-1">الفروق والبيانات المعدلة:</p>
+                    <div className="bg-surface-card/60 p-3 rounded-xl border border-surface-border text-xs text-text-secondary space-y-2">
+                      <p className="font-bold text-[10px] text-text-secondary border-b border-surface-border pb-1">الفروق والبيانات المعدلة:</p>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px] font-mono">
                         {req.proposedData.name && req.proposedData.name !== req.originalData.name && (
                           <div className="col-span-2">
-                            <span className="text-zinc-500 block">تعديل الاسم:</span>
+                            <span className="text-text-secondary block">تعديل الاسم:</span>
                             <span className="text-rose-400 line-through truncate block">{req.originalData.name}</span>
-                            <span className="text-emerald-400 font-sans font-bold block">← {req.proposedData.name}</span>
+                            <span className="text-brand-light font-sans font-bold block">← {req.proposedData.name}</span>
                           </div>
                         )}
                         
                         {req.proposedData.priceWholesale !== undefined && req.proposedData.priceWholesale !== req.originalData.priceWholesale && (
-                          <div className="bg-neutral-950 p-1.5 rounded border border-neutral-900 flex justify-between">
-                            <span className="text-neutral-400">سعر الجملة:</span>
+                          <div className="bg-surface-base p-1.5 rounded border border-surface-border flex justify-between">
+                            <span className="text-text-secondary">سعر الجملة:</span>
                             <span>
                               <span className="text-rose-400 line-through">{req.originalData.priceWholesale}</span>
-                              <span className="text-emerald-400 font-bold mr-1.5">← {req.proposedData.priceWholesale} ج.م</span>
+                              <span className="text-brand-light font-bold mr-1.5">← {req.proposedData.priceWholesale} ج.م</span>
                             </span>
                           </div>
                         )}
 
                         {req.proposedData.priceRetail !== undefined && req.proposedData.priceRetail !== req.originalData.priceRetail && (
-                          <div className="bg-neutral-950 p-1.5 rounded border border-neutral-900 flex justify-between">
-                            <span className="text-neutral-400">سعر القطاعي:</span>
+                          <div className="bg-surface-base p-1.5 rounded border border-surface-border flex justify-between">
+                            <span className="text-text-secondary">سعر القطاعي:</span>
                             <span>
                               <span className="text-rose-400 line-through">{req.originalData.priceRetail}</span>
-                              <span className="text-emerald-400 font-bold mr-1.5">← {req.proposedData.priceRetail} ج.م</span>
+                              <span className="text-brand-light font-bold mr-1.5">← {req.proposedData.priceRetail} ج.م</span>
                             </span>
                           </div>
                         )}
 
                         {req.proposedData.priceCost !== undefined && req.proposedData.priceCost !== req.originalData.priceCost && (
-                          <div className="bg-neutral-950 p-1.5 rounded border border-neutral-900 flex justify-between">
-                            <span className="text-neutral-400">سعر التكلفة:</span>
+                          <div className="bg-surface-base p-1.5 rounded border border-surface-border flex justify-between">
+                            <span className="text-text-secondary">سعر التكلفة:</span>
                             <span>
                               <span className="text-rose-400 line-through">{req.originalData.priceCost !== undefined ? req.originalData.priceCost : 0}</span>
-                              <span className="text-emerald-400 font-bold mr-1.5">← {req.proposedData.priceCost} ج.م</span>
+                              <span className="text-brand-light font-bold mr-1.5">← {req.proposedData.priceCost} ج.م</span>
                             </span>
                           </div>
                         )}
 
                         {req.proposedData.maxDiscountProfitPercent !== undefined && req.proposedData.maxDiscountProfitPercent !== req.originalData.maxDiscountProfitPercent && (
-                          <div className="bg-neutral-950 p-1.5 rounded border border-neutral-900 flex justify-between">
-                            <span className="text-neutral-400">حد الخصم من الربح:</span>
+                          <div className="bg-surface-base p-1.5 rounded border border-surface-border flex justify-between">
+                            <span className="text-text-secondary">حد الخصم من الربح:</span>
                             <span>
                               <span className="text-rose-400 line-through">{req.originalData.maxDiscountProfitPercent !== undefined ? req.originalData.maxDiscountProfitPercent : 50}%</span>
-                              <span className="text-emerald-400 font-bold mr-1.5">← {req.proposedData.maxDiscountProfitPercent}%</span>
+                              <span className="text-brand-light font-bold mr-1.5">← {req.proposedData.maxDiscountProfitPercent}%</span>
                             </span>
                           </div>
                         )}
 
                         {req.proposedData.stockBranch1 !== undefined && req.proposedData.stockBranch1 !== req.originalData.stockBranch1 && (
-                          <div className="bg-neutral-950 p-1.5 rounded border border-neutral-900 flex justify-between">
-                            <span className="text-neutral-400">مخزون فرع 1:</span>
+                          <div className="bg-surface-base p-1.5 rounded border border-surface-border flex justify-between">
+                            <span className="text-text-secondary">مخزون فرع 1:</span>
                             <span>
                               <span className="text-rose-400 line-through">{req.originalData.stockBranch1}</span>
-                              <span className="text-emerald-400 font-bold mr-1.5">← {req.proposedData.stockBranch1} ق</span>
+                              <span className="text-brand-light font-bold mr-1.5">← {req.proposedData.stockBranch1} ق</span>
                             </span>
                           </div>
                         )}
 
                         {req.proposedData.stockBranch2 !== undefined && req.proposedData.stockBranch2 !== req.originalData.stockBranch2 && (
-                          <div className="bg-neutral-950 p-1.5 rounded border border-neutral-900 flex justify-between">
-                            <span className="text-neutral-400">مخزون فرع 2:</span>
+                          <div className="bg-surface-base p-1.5 rounded border border-surface-border flex justify-between">
+                            <span className="text-text-secondary">مخزون فرع 2:</span>
                             <span>
                               <span className="text-rose-400 line-through">{req.originalData.stockBranch2}</span>
-                              <span className="text-emerald-400 font-bold mr-1.5">← {req.proposedData.stockBranch2} ق</span>
+                              <span className="text-brand-light font-bold mr-1.5">← {req.proposedData.stockBranch2} ق</span>
                             </span>
                           </div>
                         )}
@@ -218,14 +218,14 @@ export default function AuditControlPanel({
                         <>
                           <button
                             onClick={() => onApproveRequest(req.id)}
-                            className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 px-4 rounded-xl flex-1 flex items-center justify-center gap-1.5 transition cursor-pointer"
+                            className="bg-brand-dark hover:bg-brand text-text-primary text-xs font-bold py-2 px-4 rounded-xl flex-1 flex items-center justify-center gap-1.5 transition cursor-pointer"
                           >
                             <Check className="w-4 h-4" />
                             اعتماد التعديل والمزامنة
                           </button>
                           <button
                             onClick={() => onRejectRequest(req.id)}
-                            className="bg-zinc-800 hover:bg-rose-900/50 text-rose-400 text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+                            className="bg-surface-card-hover hover:bg-rose-900/50 text-rose-400 text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
                             title="رفض"
                           >
                             <X className="w-4 h-4" />
@@ -246,17 +246,17 @@ export default function AuditControlPanel({
 
           {/* History of Processed Requests */}
           {processedRequests.length > 0 && (
-            <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6">
-              <h4 className="font-bold text-sm text-neutral-300 mb-4 flex items-center gap-2">
-                <Layers className="w-4.5 h-4.5 text-neutral-400" />
+            <div className="bg-surface-card border border-surface-border rounded-3xl p-6">
+              <h4 className="font-bold text-sm text-text-secondary mb-4 flex items-center gap-2">
+                <Layers className="w-4.5 h-4.5 text-text-secondary" />
                 آخر القرارات والطلبات المعالجة للفرعين ({processedRequests.length})
               </h4>
               <div className="space-y-3 max-h-[180px] overflow-y-auto">
                 {processedRequests.map((req) => (
-                  <div key={req.id} className="p-3 bg-neutral-950 border border-neutral-850 rounded-xl flex items-center justify-between text-xs">
+                  <div key={req.id} className="p-3 bg-surface-base border border-surface-border rounded-xl flex items-center justify-between text-xs">
                     <div>
-                      <span className="font-semibold text-neutral-200 block">{req.productName}</span>
-                      <span className="text-[10px] text-neutral-500">
+                      <span className="font-semibold text-text-primary block">{req.productName}</span>
+                      <span className="text-[10px] text-text-tertiary">
                         بواسطة {req.requestedBy} • {new Date(req.requestedAt).toLocaleDateString("ar-EG")}
                       </span>
                     </div>
@@ -280,14 +280,14 @@ export default function AuditControlPanel({
 
         {/* Right Column (6 cols): Live System Auditing activity logs */}
         <div className="lg:col-span-6 space-y-6">
-          <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 flex flex-col h-full justify-between">
+          <div className="bg-surface-card border border-surface-border rounded-3xl p-6 flex flex-col h-full justify-between">
             <div>
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-zinc-800 pb-4 mb-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-surface-border pb-4 mb-4">
                 <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-cyan-400" />
+                  <Clock className="w-5 h-5 text-brand-light" />
                   <div>
-                    <h4 className="font-bold text-sm text-neutral-100">سجل النشاط وحركات الموظفين بالثانية</h4>
-                    <p className="text-[10px] text-neutral-500">رقابة تلقائية تامة لجميع عمليات الإضافة والبيع</p>
+                    <h4 className="font-bold text-sm text-text-primary">سجل النشاط وحركات الموظفين بالثانية</h4>
+                    <p className="text-[10px] text-text-tertiary">رقابة تلقائية تامة لجميع عمليات الإضافة والبيع</p>
                   </div>
                 </div>
               </div>
@@ -297,7 +297,7 @@ export default function AuditControlPanel({
                 <button
                   onClick={() => setLogFilter("all")}
                   className={`px-1.5 py-1.5 rounded-lg text-[10px] font-bold text-center border transition cursor-pointer ${
-                    logFilter === "all" ? "bg-cyan-500 text-neutral-950 border-cyan-400" : "bg-neutral-950 text-neutral-400 border-neutral-850 hover:bg-neutral-900"
+                    logFilter === "all" ? "bg-brand text-text-tertiary border-brand" : "bg-surface-base text-text-secondary border-surface-border hover:bg-surface-card"
                   }`}
                 >
                   الكل
@@ -305,7 +305,7 @@ export default function AuditControlPanel({
                 <button
                   onClick={() => setLogFilter("adds")}
                   className={`px-1.5 py-1.5 rounded-lg text-[10px] font-bold text-center border transition cursor-pointer ${
-                    logFilter === "adds" ? "bg-emerald-500 text-white border-emerald-400" : "bg-neutral-950 text-emerald-400 border-neutral-850 hover:bg-neutral-900"
+                    logFilter === "adds" ? "bg-brand text-text-primary border-brand" : "bg-surface-base text-brand-light border-surface-border hover:bg-surface-card"
                   }`}
                 >
                   إضافة منتج
@@ -313,7 +313,7 @@ export default function AuditControlPanel({
                 <button
                   onClick={() => setLogFilter("edits")}
                   className={`px-1.5 py-1.5 rounded-lg text-[10px] font-bold text-center border transition cursor-pointer ${
-                    logFilter === "edits" ? "bg-amber-500 text-neutral-950 border-amber-400" : "bg-neutral-950 text-amber-400 border-neutral-850 hover:bg-neutral-900"
+                    logFilter === "edits" ? "bg-amber-500 text-text-tertiary border-amber-400" : "bg-surface-base text-amber-400 border-surface-border hover:bg-surface-card"
                   }`}
                 >
                   الحماية والتعديلات
@@ -321,7 +321,7 @@ export default function AuditControlPanel({
                 <button
                   onClick={() => setLogFilter("sales")}
                   className={`px-1.5 py-1.5 rounded-lg text-[10px] font-bold text-center border transition cursor-pointer ${
-                    logFilter === "sales" ? "bg-blue-500 text-white border-blue-400" : "bg-neutral-950 text-blue-400 border-neutral-850 hover:bg-neutral-900"
+                    logFilter === "sales" ? "bg-blue-500 text-text-primary border-blue-400" : "bg-surface-base text-blue-400 border-surface-border hover:bg-surface-card"
                   }`}
                 >
                   مبيعات
@@ -329,7 +329,7 @@ export default function AuditControlPanel({
                 <button
                   onClick={() => setLogFilter("transfers")}
                   className={`px-1.5 py-1.5 rounded-lg text-[10px] font-bold text-center col-span-2 md:col-span-1 border transition cursor-pointer ${
-                    logFilter === "transfers" ? "bg-purple-500 text-white border-purple-400" : "bg-neutral-950 text-purple-400 border-neutral-850 hover:bg-neutral-900"
+                    logFilter === "transfers" ? "bg-purple-500 text-text-primary border-purple-400" : "bg-surface-base text-purple-400 border-surface-border hover:bg-surface-card"
                   }`}
                 >
                   تحويلات
@@ -343,20 +343,20 @@ export default function AuditControlPanel({
                   placeholder="اصف السجل بالبحث عن موظف أو نوع السلعة..."
                   value={logSearch}
                   onChange={(e) => setLogSearch(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-850 rounded-xl pr-9 pl-3 py-1.5 text-xs text-neutral-200 outline-none focus:border-cyan-500/50"
+                  className="w-full bg-surface-base border border-surface-border rounded-xl pr-9 pl-3 py-1.5 text-xs text-text-primary outline-none focus:border-brand/50"
                 />
-                <Search className="w-4 h-4 text-zinc-500 absolute right-3 top-2" />
+                <Search className="w-4 h-4 text-text-secondary absolute right-3 top-2" />
               </div>
 
               {/* Logs Timeline */}
               {filteredLogs.length === 0 ? (
-                <div className="py-12 text-center text-zinc-500">
+                <div className="py-12 text-center text-text-secondary">
                   <p className="text-xs font-semibold">لم يُعثر على سجلات تطابق الفلتر الحالي.</p>
                 </div>
               ) : (
                 <div className="space-y-3.5 max-h-[480px] overflow-y-auto pr-1">
                   {filteredLogs.map((log) => {
-                    let colorClass = "bg-neutral-900 border-neutral-850 text-neutral-300";
+                    let colorClass = "bg-surface-card border-surface-border text-text-secondary";
                     let actionBadge = "";
                     
                     if (log.actionType === "add_product") {
@@ -382,29 +382,29 @@ export default function AuditControlPanel({
                     return (
                       <div 
                         key={log.id} 
-                        className={`p-3 border rounded-xl flex items-start gap-3 transition hover:bg-neutral-900/50 ${colorClass}`}
+                        className={`p-3 border rounded-xl flex items-start gap-3 transition hover:bg-surface-card/50 ${colorClass}`}
                       >
                         {/* Timeline node */}
-                        <div className="w-6 h-6 rounded-full bg-neutral-950 border border-neutral-800 flex items-center justify-center shrink-0 mt-0.5 text-[9px] font-black text-neutral-400 font-mono">
+                        <div className="w-6 h-6 rounded-full bg-surface-base border border-surface-border flex items-center justify-center shrink-0 mt-0.5 text-[9px] font-black text-text-secondary font-mono">
                           {log.user === "admin" ? "AD" : log.user === "user 1" ? "U1" : log.user === "user 2" ? "U2" : "SY"}
                         </div>
                         <div className="flex-1 min-w-0 space-y-1">
                           <div className="flex items-center justify-between gap-2.5">
-                            <span className="text-[11px] font-bold text-neutral-100 flex items-center gap-1 border-b border-dashed border-neutral-800 pb-0.5">
+                            <span className="text-[11px] font-bold text-text-primary flex items-center gap-1 border-b border-dashed border-surface-border pb-0.5">
                               {log.user === "admin" ? "المدير العام (admin)" : log.user === "user 1" ? "مشرف الفرع 1" : log.user === "user 2" ? "مشرف الفرع 2" : "النظام"}
                             </span>
-                            <span className="text-[9px] text-neutral-500 font-mono">
+                            <span className="text-[9px] text-text-tertiary font-mono">
                               {new Date(log.timestamp).toLocaleTimeString("ar-EG")}
                             </span>
                           </div>
-                          <p className="text-xs leading-relaxed break-words font-sans text-neutral-300 font-medium">
+                          <p className="text-xs leading-relaxed break-words font-sans text-text-secondary font-medium">
                             {log.details}
                           </p>
                           <div className="flex items-center gap-2">
-                            <span className="text-[8px] bg-neutral-950 text-neutral-400 px-1.5 py-0.5 rounded border border-neutral-800 tracking-wider">
+                            <span className="text-[8px] bg-surface-base text-text-secondary px-1.5 py-0.5 rounded border border-surface-border tracking-wider">
                               {actionBadge}
                             </span>
-                            <span className="text-[8px] text-neutral-500 font-mono">
+                            <span className="text-[8px] text-text-tertiary font-mono">
                               {new Date(log.timestamp).toLocaleDateString("ar-EG")}
                             </span>
                           </div>

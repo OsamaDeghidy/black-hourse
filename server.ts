@@ -282,15 +282,35 @@ app.post(["/api/gemini", "/gemini"], async (req, res) => {
 5. لا تشير إلى تفاصيل فنية عن الكود أو الخوادم مطلقاً، ركز على الجوانب المادية، الأرباح، التعبئة، والتحليلات المالية.`;
     }
 
+    // Optimize data payload to avoid hitting Groq TPM (Tokens Per Minute) limit
+    const optimizedInventory = currentInventory.map((item: any) => ({
+      n: item.name,
+      c: item.category,
+      pw: item.priceWholesale,
+      pr: item.priceRetail,
+      b1: item.stockBranch1,
+      b2: item.stockBranch2,
+      comp: item.compatibleMobiles?.slice(0, 3).join(",") // Only first 3 compatible mobiles to save space
+    })).slice(0, 100); // Limit to top 100 items if inventory gets huge
+
+    const optimizedSales = salesHistory.map((sale: any) => ({
+      n: sale.productName,
+      b: sale.branch,
+      q: sale.quantity,
+      p: sale.price,
+      prft: sale.profit,
+      d: new Date(sale.date).toISOString().split('T')[0] // Only the date part
+    })).slice(-30); // Only send the last 30 sales to save tokens
+
     const userPrompt = `
 نوع المحاكاة المطلوب: ${scenarioType || 'عامة'}
 الطلب المخصص للعميل: ${prompt}
 
-تفاصيل المخزون الحالي:
-${JSON.stringify(currentInventory, null, 2)}
+ملخص المخزون الحالي (أهم 100 صنف):
+${JSON.stringify(optimizedInventory)}
 
-سجل المبيعات الأخيرة:
-${JSON.stringify(salesHistory, null, 2)}
+ملخص آخر 30 حركة بيع:
+${JSON.stringify(optimizedSales)}
 
 الرجاء تقديم تحليل ذكي للغاية يتضمن:
 1. تقييم للوضعية والسيناريو المتخيل.
@@ -326,8 +346,15 @@ ${JSON.stringify(salesHistory, null, 2)}
     res.json({ reply: replyText, text: replyText });
   } catch (error: any) {
     console.error("Groq API Error:", error);
+    
+    // User-friendly error mapping for Groq Rate Limits
+    let errorMsg = error.message || error;
+    if (errorMsg.includes("Rate limit reached")) {
+      errorMsg = "تم الوصول للحد الأقصى للطلبات المجانية في الدقيقة. يرجى الانتظار 30 ثانية والمحاولة مرة أخرى.";
+    }
+
     res.status(500).json({ 
-      error: "حدث خطأ أثناء الاتصال بالمساعد الذكي: " + (error.message || error) 
+      error: "حدث خطأ أثناء الاتصال بالمساعد الذكي: " + errorMsg 
     });
   }
 });

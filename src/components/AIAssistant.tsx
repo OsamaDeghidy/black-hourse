@@ -98,36 +98,36 @@ export default function AIAssistant({ items, sales }: AIAssistantProps) {
   };
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-3xl flex flex-col h-[560px] text-right overflow-hidden mb-6" dir="rtl">
+    <div className="bg-surface-card border border-surface-border rounded-3xl flex flex-col h-[560px] text-right overflow-hidden mb-6" dir="rtl">
       {/* Header */}
-      <div className="bg-neutral-950 border-b border-neutral-850 px-5 py-4 flex items-center justify-between">
+      <div className="bg-surface-base border-b border-surface-border px-5 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-sky-400 flex items-center justify-center text-neutral-950 shadow-md">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-sky-400 flex items-center justify-center text-text-tertiary shadow-md">
             <Bot className="w-5 h-5 font-bold" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-bold text-white text-base">مساعد blackhours الذكي للتنبؤ ومحاكاة المبيعات</span>
-              <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
+              <span className="font-bold text-text-primary text-base">مساعد blackhours الذكي للتنبؤ ومحاكاة المبيعات</span>
+              <Sparkles className="w-4 h-4 text-brand-light animate-pulse" />
             </div>
-            <p className="text-[11px] text-neutral-400">التخيلات الاقتصادية، النواقص الناتجة عن السحب، وتخطيط الأسعار المدعوم بالذكاء الاصطناعي</p>
+            <p className="text-[11px] text-text-secondary">التخيلات الاقتصادية، النواقص الناتجة عن السحب، وتخطيط الأسعار المدعوم بالذكاء الاصطناعي</p>
           </div>
         </div>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-neutral-950/40">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-surface-base/40">
         {messages.map((msg, idx) => (
           <div key={idx} className={`flex ${msg.role === "user" ? "justify-start" : "justify-end"}`}>
             <div
               className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
                 msg.role === "user"
-                  ? "bg-cyan-500 text-neutral-950 font-bold rounded-tr-none"
-                  : "bg-neutral-950 text-neutral-200 border border-neutral-850 rounded-tl-none font-sans"
+                  ? "bg-brand text-text-tertiary font-bold rounded-tr-none"
+                  : "bg-surface-base text-text-primary border border-surface-border rounded-tl-none font-sans"
               }`}
             >
               {msg.role === "assistant" ? (
-                <div className="markdown-body text-neutral-200 space-y-1.5">
+                <div className="markdown-body text-text-primary space-y-1.5">
                   <ReactMarkdown>{msg.content}</ReactMarkdown>
                 </div>
               ) : (
@@ -138,8 +138,8 @@ export default function AIAssistant({ items, sales }: AIAssistantProps) {
         ))}
         {isLoading && (
           <div className="flex justify-end">
-            <div className="bg-neutral-950 border border-neutral-850 rounded-2xl rounded-tl-none px-4 py-3 text-sm text-neutral-400 flex items-center gap-2">
-              <RefreshCw className="w-4 h-4 animate-spin text-cyan-400" />
+            <div className="bg-surface-base border border-surface-border rounded-2xl rounded-tl-none px-4 py-3 text-sm text-text-secondary flex items-center gap-2">
+              <RefreshCw className="w-4 h-4 animate-spin text-brand-light" />
               <span>جاري محاكاة السيناريو وحساب التخيلات الاقتصادية...</span>
             </div>
           </div>
@@ -154,21 +154,21 @@ export default function AIAssistant({ items, sales }: AIAssistantProps) {
       </div>
 
       {/* Scenarios shortcuts */}
-      <div className="bg-neutral-950 border-t border-neutral-850 px-4 py-3">
-        <span className="text-[10px] uppercase tracking-wider text-neutral-500 block mb-2 font-bold">سيناريوهات محاكاة سريعة ومتقدمة لمخازن blackhours:</span>
+      <div className="bg-surface-base border-t border-surface-border px-4 py-3">
+        <span className="text-[10px] uppercase tracking-wider text-text-tertiary block mb-2 font-bold">سيناريوهات محاكاة سريعة ومتقدمة لمخازن blackhours:</span>
         <div className="flex gap-2 overflow-x-auto pb-1.5 scrollbar-thin">
           <button
             onClick={() => triggerScenario("forecasting", "📊 توقع النواقص ونقل البضائع بين الفروع")}
             disabled={isLoading}
-            className="shrink-0 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-xl px-3 py-2 text-xs text-cyan-300 hover:text-cyan-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
+            className="shrink-0 bg-surface-card hover:bg-surface-card-hover border border-surface-border rounded-xl px-3 py-2 text-xs text-cyan-300 hover:text-cyan-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
           >
-            <TrendingUp className="w-3.5 h-3.5 text-cyan-400" />
+            <TrendingUp className="w-3.5 h-3.5 text-brand-light" />
             موازنة فروع blackhours
           </button>
           <button
             onClick={() => triggerScenario("simulation", "🛍️ محاكاة حملة عروض وزيادة مبيعات")}
             disabled={isLoading}
-            className="shrink-0 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-xl px-3 py-2 text-xs text-sky-300 hover:text-sky-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
+            className="shrink-0 bg-surface-card hover:bg-surface-card-hover border border-surface-border rounded-xl px-3 py-2 text-xs text-sky-300 hover:text-sky-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
           >
             <BarChart2 className="w-3.5 h-3.5 text-sky-400" />
             محاكاة ترويج الإكسسوارات
@@ -176,7 +176,7 @@ export default function AIAssistant({ items, sales }: AIAssistantProps) {
           <button
             onClick={() => triggerScenario("adviser", "💡 استشارة بضائع جديدة وتسعير قطع الغيار")}
             disabled={isLoading}
-            className="shrink-0 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-xl px-3 py-2 text-xs text-amber-300 hover:text-amber-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
+            className="shrink-0 bg-surface-card hover:bg-surface-card-hover border border-surface-border rounded-xl px-3 py-2 text-xs text-amber-300 hover:text-amber-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
           >
             <Lightbulb className="w-3.5 h-3.5 text-amber-400" />
             دليل التسعير وشراء الجديد
@@ -184,7 +184,7 @@ export default function AIAssistant({ items, sales }: AIAssistantProps) {
           <button
             onClick={() => triggerScenario("deadstock", "🔍 رصد السلع الراكدة وتسييل المخازن")}
             disabled={isLoading}
-            className="shrink-0 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-xl px-3 py-2 text-xs text-rose-300 hover:text-rose-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
+            className="shrink-0 bg-surface-card hover:bg-surface-card-hover border border-surface-border rounded-xl px-3 py-2 text-xs text-rose-300 hover:text-rose-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
           >
             <Percent className="w-3.5 h-3.5 text-rose-400" />
             تسييل السلع الراكدة
@@ -192,15 +192,15 @@ export default function AIAssistant({ items, sales }: AIAssistantProps) {
           <button
             onClick={() => triggerScenario("pricing", "💰 مراجعة فروق الأسعار وهامش الربح")}
             disabled={isLoading}
-            className="shrink-0 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-xl px-3 py-2 text-xs text-emerald-300 hover:text-emerald-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
+            className="shrink-0 bg-surface-card hover:bg-surface-card-hover border border-surface-border rounded-xl px-3 py-2 text-xs text-emerald-300 hover:text-emerald-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
           >
-            <Coins className="w-3.5 h-3.5 text-emerald-400" />
+            <Coins className="w-3.5 h-3.5 text-brand-light" />
             تعديلات التسعير والتضخم
           </button>
           <button
             onClick={() => triggerScenario("purchase", "📦 توليد قائمة المشتريات الذكية")}
             disabled={isLoading}
-            className="shrink-0 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-xl px-3 py-2 text-xs text-purple-300 hover:text-purple-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
+            className="shrink-0 bg-surface-card hover:bg-surface-card-hover border border-surface-border rounded-xl px-3 py-2 text-xs text-purple-300 hover:text-purple-200 transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
           >
             <ShoppingBag className="w-3.5 h-3.5 text-purple-400" />
             قائمة توريد جديدة
@@ -214,7 +214,7 @@ export default function AIAssistant({ items, sales }: AIAssistantProps) {
           e.preventDefault();
           handleSendMessage();
         }}
-        className="p-3 bg-neutral-950 border-t border-neutral-850 flex gap-2"
+        className="p-3 bg-surface-base border-t border-surface-border flex gap-2"
       >
         <input
           type="text"
@@ -222,12 +222,12 @@ export default function AIAssistant({ items, sales }: AIAssistantProps) {
           value={inputPrompt}
           onChange={(e) => setInputPrompt(e.target.value)}
           disabled={isLoading}
-          className="flex-1 bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2 text-sm text-neutral-100 outline-none focus:border-cyan-500/50 transition disabled:opacity-75"
+          className="flex-1 bg-surface-card border border-surface-border rounded-xl px-4 py-2 text-sm text-text-primary outline-none focus:border-brand/50 transition disabled:opacity-75"
         />
         <button
           type="submit"
           disabled={isLoading || !inputPrompt.trim()}
-          className="bg-cyan-500 hover:bg-cyan-400 disabled:bg-neutral-850 disabled:text-neutral-500 text-neutral-950 font-bold w-10 h-10 rounded-xl flex items-center justify-center transition shrink-0 cursor-pointer"
+          className="bg-brand hover:bg-cyan-400 disabled:bg-surface-card-hover disabled:text-text-tertiary text-text-tertiary font-bold w-10 h-10 rounded-xl flex items-center justify-center transition shrink-0 cursor-pointer"
         >
           <Send className="w-4 h-4 transform rotate-180" />
         </button>

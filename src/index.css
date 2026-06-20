@@ -2,12 +2,123 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Cairo", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Space Mono", monospace;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-brand: var(--theme-brand);
+  --color-brand-light: var(--theme-brand-light);
+  --color-brand-dark: var(--theme-brand-dark);
+  
+  --color-surface-base: var(--theme-surface-base);
+  --color-surface-card: var(--theme-surface-card);
+  --color-surface-card-hover: var(--theme-surface-card-hover);
+  --color-surface-border: var(--theme-surface-border);
+  
+  --color-text-primary: var(--theme-text-primary);
+  --color-text-secondary: var(--theme-text-secondary);
+  --color-text-tertiary: var(--theme-text-tertiary);
+
+  --color-text-tertiary: var(--theme-text-tertiary);
+
+  --font-sans: var(--theme-font-sans);
+  --font-display: var(--theme-font-display);
+  --font-mono: var(--theme-font-mono);
+}
+
+@layer base {
+  :root {
+    /* Default Theme (Midnight Emerald - Modern Dark Premium) */
+    --theme-brand: #10b981; /* emerald-500 */
+    --theme-brand-light: #34d399; /* emerald-400 */
+    --theme-brand-dark: #059669; /* emerald-600 */
+
+    --theme-surface-base: #09090b; /* zinc-950 */
+    --theme-surface-card: #18181b; /* zinc-900 */
+    --theme-surface-card-hover: #27272a; /* zinc-800 */
+    --theme-surface-border: #3f3f46; /* zinc-700 */
+
+    --theme-text-primary: #ffffff; /* pure white for crisp dark mode */
+    --theme-text-secondary: #a1a1aa; /* zinc-400 */
+    --theme-text-tertiary: #71717a; /* zinc-500 */
+    
+    --theme-font-sans: "Cairo", "Inter", ui-sans-serif, system-ui, sans-serif;
+    --theme-font-display: "Space Grotesk", "Space Mono", monospace;
+    --theme-font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  :root[data-theme="light"] {
+    /* Light Modern Corporate Theme (Apple-like Clean) */
+    --theme-brand: #2563eb; /* blue-600 */
+    --theme-brand-light: #3b82f6; /* blue-500 */
+    --theme-brand-dark: #1d4ed8; /* blue-700 */
+
+    --theme-surface-base: #f8fafc; /* slate-50 */
+    --theme-surface-card: #ffffff; /* pure white */
+    --theme-surface-card-hover: #f1f5f9; /* slate-100 */
+    --theme-surface-border: #e2e8f0; /* slate-200 */
+
+    --theme-text-primary: #0f172a; /* slate-900 */
+    --theme-text-secondary: #475569; /* slate-600 */
+    --theme-text-tertiary: #94a3b8; /* slate-400 */
+
+    --theme-font-sans: "Inter", "Cairo", ui-sans-serif, system-ui, sans-serif;
+    --theme-font-display: "Inter", "Space Grotesk", monospace;
+    --theme-font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  :root[data-theme="royal"] {
+    /* Royal Violet Theme (Cyberpunk/Neon vibe) */
+    --theme-brand: #a855f7; /* purple-500 */
+    --theme-brand-light: #c084fc; /* purple-400 */
+    --theme-brand-dark: #7e22ce; /* purple-700 */
+
+    --theme-surface-base: #020617; /* slate-950 - deep blue black */
+    --theme-surface-card: #0f172a; /* slate-900 */
+    --theme-surface-card-hover: #1e293b; /* slate-800 */
+    --theme-surface-border: #334155; /* slate-700 */
+
+    --theme-text-primary: #f8fafc; /* slate-50 */
+    --theme-text-secondary: #cbd5e1; /* slate-300 */
+    --theme-text-tertiary: #64748b; /* slate-500 */
+
+    --theme-font-sans: "Space Grotesk", "Cairo", ui-sans-serif, system-ui, sans-serif;
+    --theme-font-display: "JetBrains Mono", "Space Grotesk", monospace;
+    --theme-font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  
+  :root[data-theme="gold"] {
+    /* Luxury Gold Theme (Warm, Executive, Earthy) */
+    --theme-brand: #d97706; /* amber-600 */
+    --theme-brand-light: #f59e0b; /* amber-500 */
+    --theme-brand-dark: #b45309; /* amber-700 */
+
+    --theme-surface-base: #111111; /* Almost black */
+    --theme-surface-card: #1c1917; /* stone-900 */
+    --theme-surface-card-hover: #292524; /* stone-800 */
+    --theme-surface-border: #44403c; /* stone-700 */
+
+    --theme-text-primary: #fafaf9; /* stone-50 */
+    --theme-text-secondary: #d6d3d1; /* stone-300 */
+    --theme-text-tertiary: #78716c; /* stone-500 */
+
+    --theme-font-sans: "Cairo", "Inter", ui-sans-serif, system-ui, sans-serif;
+    --theme-font-display: "Cairo", "Space Grotesk", monospace;
+    --theme-font-mono: "Space Grotesk", ui-monospace, monospace;
+  }
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #0a0a0a;
+  background-color: var(--theme-surface-base);
+  color: var(--theme-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.glass-panel {
+  background: color-mix(in srgb, var(--theme-surface-card) 75%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--theme-surface-border) 40%, transparent);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
+}
+
+.theme-transition {
+  transition: all 0.3s ease;
 }
